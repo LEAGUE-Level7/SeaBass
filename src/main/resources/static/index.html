@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Entry Page</title>
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="./style.css" />
+
+    <!-- import the webpage's javascript file -->
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+ 
+  
+  
+  <button value="click me" onclick="makeMessage()">Click ME</button>
+  
+  
+  
+    <div class="content">
+      <p style="font-size: 4px;">Other Site</p>
+      <h1 class="contentItem">Can I be Doxed?</h1>
+      <br />
+      <h2 class="contentItem">
+        Take the Test and Check your Dox Risk Level
+      </h2>
+      <br />
+
+      <div class="select">
+
+        <form href="/redirect.html">
+          <select class="buttonstyle">
+            <option value="default">Select a source...</option>
+            <option value="fb">Facebook</option>
+            <option value="tw">Twitter</option>
+            <option value="ig">Instagram</option>
+            <option value="age">Twitter</option>
+          </select>
+
+          <div class="input">
+            <label class="labelstyle" for="target"
+              >Account Name / Handle:</label
+            >
+            <input type="text" id="target" name="target" />
+          </div>
+
+          <select class="buttonstyle" onchange="addSearchObject(this.value);">
+            <option value="default">Select a search object...</option>
+            <option value="all">All</option>
+            <option value="name_div">Name</option>
+            <option value="birth_div">Birthday</option>
+            <option value="age_div">Age</option>
+          </select>
+          <div class="input hidden" id="name_div" >
+            <label class="labelstyle" for="name">Name:</label>
+            <input type="text" id="name" name="name" />
+          </div>
+          <div class="input hidden " id="age_div" >
+            <label class="labelstyle" for="age">Age:</label>
+            <input type="text" id="age" name="age" />
+          </div>
+          <div class="input hidden" id="birth_div" >
+            <label class="labelstyle" for="birthday">Birthday:</label>
+            <input type="text" id="birthday" name="birthday" />
+          </div>
+
+          <br />
+          
+          <div class="check_box">
+            <label>
+              <input type="checkbox" name="Agreement" />
+              <span>
+                By Checking you allow your results to be added to the global average.
+                Specific data will not be public.
+              </span>
+            </label>
+          </div>
+          <br />
+        </form>
+        
+          <button class="buttonstyle" href="https://entrypage.glitch.me/">
+            Click Here to Run Scan
+          </b
+        utton>
+      
+      </div>
+    </div>
+
+    <script src="https://button.glitch.me/button.js" defer></script>
+  </body>
+</html>

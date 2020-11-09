@@ -1,0 +1,74 @@
+/* CSS files add styling rules to your content */
+
+body {
+  font-family: sans-serif, helvetica, arial;
+/*   margin: 2em; */
+  background-color: #131435;
+}
+
+h1 {
+  font-family: sans-serif;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+h2 {
+  font-family: sans-serif;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.content {
+  width: 50%;
+  align: center;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: solid;
+  color: white;
+  justify-content: center;
+}
+
+.content .contentItem {
+/*   border-color: white;
+  border: solid 1px; */
+}
+
+.select {
+  text-align: center;
+}
+
+.buttonstyle {
+  padding: 1em;
+  margin: 1rem;
+  background-color: #DDDDDD;
+  color: black;
+  border-radius: 10px;
+}
+
+
+.labelstyle {
+  color: #FFFFFF;
+  font-weight: bold;
+}
+
+.check_box {
+  text-align: center;
+  border-color: white;
+  border: solid 1px;
+  padding: 0.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+span {
+  color: white;
+  text-align: center;
+}
+
+.input{
+  padding: 0.5em;
+}
+
+.hidden {
+  display: none;
+}
