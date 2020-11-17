@@ -18,7 +18,7 @@ public class MyController {
 	@PostMapping("/getScore")
 	String myMethod(@RequestBody String str) {
 		System.out.println("post request: " + str);
-			return "" + new Random().nextInt(1000);
+			return "{threatlevel:" + new Random().nextInt(1000)+ "}";
 		
 	}
 }
