@@ -15,14 +15,10 @@ public class MyController {
 		return "hello";
 	}
 
-	@PostMapping("/")
+	@PostMapping("/getScore")
 	String myMethod(@RequestBody String str) {
 		System.out.println("post request: " + str);
-		if (str.trim().equalsIgnoreCase("getScore")) {
-			
 			return "" + new Random().nextInt(1000);
-		} else {
-			return "" + -1;
-		}
+		
 	}
 }
