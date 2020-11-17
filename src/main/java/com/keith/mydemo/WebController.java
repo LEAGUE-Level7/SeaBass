@@ -10,5 +10,9 @@ public class WebController {
 	String myMethod() {
 		return "index.html";
 	}
-}
 
+	@GetMapping("/test")
+	String redirectMethod() {
+		return "redirect.html";
+	}
+}
