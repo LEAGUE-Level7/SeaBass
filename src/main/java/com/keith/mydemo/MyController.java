@@ -10,10 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MyController {
 
-	@GetMapping("/")
-	String myMethod() {
-		return "hello";
-	}
 
 	@PostMapping("/getScore")
 	Threat myMethod(@RequestBody String str) {
