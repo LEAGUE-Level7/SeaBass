@@ -8,12 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MyController {
 	
-	@GetMapping("/")
-	String myMethod() {
-		return "hello";
-	}
+
 	
-	@PostMapping("/")
+	@PostMapping("/post")
 	String myMethod(@RequestBody String str) {
 		System.out.println("hello you have made a request");
 		return str;

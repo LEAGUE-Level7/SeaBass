@@ -1,17 +1,23 @@
-alert("hello");
 
-function makeMessage(){
-	alert("you clicked the button!");
-	postData('http://localhost:8080', { answer: 42 })
+
+const sampleForm = document.getElementById("sampleform");
+sampleForm.addEventListener("submit", (event) => {
+	event.preventDefault();
+	console.log("form submitted");
+	postData('http://localhost:8080/post', { something: "truygrdg" })
 	  .then(data => {
-	    console.log(data); // JSON data parsed by `data.json()` call
-	  });
-}
+	    console.log(data); 
+		window.location.href = "http://localhost:8080/redirect";// JSON data parsed by `data.json()` call
+	 });
+
+})
 
 
 //Example POST method implementation:
 async function postData(url = '', data = {}) {
-  // Default options are marked with *
+  // Default option;s are marked with *
+  console.log(data);
+  
   const response = await fetch(url, {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     headers: {
