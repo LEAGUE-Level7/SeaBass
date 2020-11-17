@@ -16,9 +16,10 @@ public class MyController {
 	}
 
 	@PostMapping("/getScore")
-	String myMethod(@RequestBody String str) {
+	Threat myMethod(@RequestBody String str) {
 		System.out.println("post request: " + str);
-			return "{threatlevel:" + new Random().nextInt(1000)+ "}";
+			return new Threat("email", "e@gmail.com");
+					//"{threatlevel:" + new Random().nextInt(1000)+ "}";
 		
 	}
 }
