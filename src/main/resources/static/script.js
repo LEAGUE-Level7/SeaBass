@@ -6,8 +6,8 @@ sampleForm.addEventListener("submit", (event) => {
 	console.log("form submitted");
 	postData('http://localhost:8080/getScore', { something: "truygrdg" })
 	  .then(data => {
-	    console.log(data); 
-		window.location.href = "http://localhost:8080/redirect";// JSON data parsed by `data.json()` call
+	    console.log(data.threatLvl); 
+	  	window.location.href = "http://localhost:8080/redirect?threatlevel=" + data.threatLvl;// JSON data parsed by `data.json()` call
 	 });
 
 })

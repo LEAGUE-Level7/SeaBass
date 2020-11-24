@@ -4,16 +4,16 @@ import java.util.HashMap;
 
 public class Threat {
 	HashMap<String, String> data = new HashMap<String, String>();
-	
+
 	public Threat(String platform, String username) {
 		data.put(platform, username);
 	}
 
 	public Threat(int favoriteNumber) {
-		
+
 	}
 
-	int threatLvl = 100000000;
+	int threatLvl = 2;
 
 	public HashMap<String, String> getData() {
 		return data;
@@ -31,5 +31,4 @@ public class Threat {
 		this.threatLvl = threatLvl;
 	}
 
-	
 }
