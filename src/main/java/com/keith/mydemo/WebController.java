@@ -16,3 +16,8 @@ public class WebController {
 	}
 }
 
+	@GetMapping("/test")
+	String redirectMethod() {
+		return "redirect.html";
+	}
+}
