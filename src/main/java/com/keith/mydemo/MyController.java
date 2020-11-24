@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class MyController {
+	
+	public MyController() {
+		DatabaseTest.initializeConnection();
+	}
 
 	@PostMapping("/getScore")
 	Threat myMethod(@RequestBody String str) {
@@ -30,5 +34,9 @@ public class MyController {
 			e.printStackTrace();
 		}
 		return "Something went wrong querying the twitter api";
+	}
+	@GetMapping("/databaseTest")
+	String databaseTest() {
+		return DatabaseTest.getAllData();
 	}
 }
