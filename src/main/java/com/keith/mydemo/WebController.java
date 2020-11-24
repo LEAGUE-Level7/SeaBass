@@ -6,10 +6,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class WebController {
 
-	@GetMapping("/page")
+	@GetMapping("/")
 	String myMethod() {
 		return "index.html";
 	}
+	@GetMapping("/redirect")
+	String redirectMethod() {
+		return "redirect.html";
+	}
+}
 
 	@GetMapping("/test")
 	String redirectMethod() {
