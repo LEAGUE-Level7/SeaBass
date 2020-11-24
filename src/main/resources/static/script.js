@@ -7,7 +7,7 @@ sampleForm.addEventListener("submit", (event) => {
 	postData('http://localhost:8080/getScore', { something: "truygrdg" })
 	  .then(data => {
 	    console.log(data); 
-		//window.location.href = "http://localhost:8080/redirect";// JSON data parsed by `data.json()` call
+		window.location.href = "http://localhost:8080/redirect";// JSON data parsed by `data.json()` call
 	 });
 
 })
