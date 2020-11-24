@@ -1,11 +1,9 @@
 package com.keith.mydemo;
 
-import java.util.Random;
+import java.io.*;
+import java.net.*;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class MyController {
@@ -15,5 +13,22 @@ public class MyController {
 		System.out.println("post request: " + str);
 			return new Threat("email", "e@gmail.com");
 					//"{threatlevel:" + new Random().nextInt(1000)+ "}";
+	}
+	
+	@GetMapping("/twitterTest")
+	String twitterTest(String username) {
+		if(username == null) {
+			username = "TwitterEng";
+		}
+		try {
+			return Twitter.dostuff(username);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "Something went wrong querying the twitter api";
 	}
 }
