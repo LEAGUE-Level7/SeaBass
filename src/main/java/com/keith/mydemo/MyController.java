@@ -39,4 +39,8 @@ public class MyController {
 	String databaseTest() {
 		return DatabaseTest.getAllData();
 	}
+	@GetMapping("/databaseTest2")
+	String databaseTest2(String number) {
+		return DatabaseTest.putSomeData(number);
+	}
 }
