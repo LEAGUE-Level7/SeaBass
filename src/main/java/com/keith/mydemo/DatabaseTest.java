@@ -6,7 +6,7 @@ public class DatabaseTest {
 	private static Connection connection = null;
 	public static void initializeConnection() {
 	     try {
-		        Class.forName("org.postgresql.Driver");
+		        Class.forName("org.postgresql.Driver ");
 		        connection = DriverManager
 		           .getConnection("jdbc:postgresql://localhost:5432/seabassdox",
 		           "postgres", "asdf");
