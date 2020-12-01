@@ -7,9 +7,13 @@ public class DatabaseTest {
 	public static void initializeConnection() {
 	     try {
 		        Class.forName("org.postgresql.Driver");
+		        String password = System.getenv("PG_PASSWORD");
+		        System.out.println(password);
+		        String path = System.getenv("Path");
+		        System.out.println(path);
 		        connection = DriverManager
 		           .getConnection("jdbc:postgresql://localhost:5432/seabassdox",
-		           "postgres", "asdf");
+		           "postgres", password);
 		        System.out.println("Connected to database!");
 		     } catch (Exception e) {
 		        e.printStackTrace();
@@ -29,7 +33,11 @@ public class DatabaseTest {
 		try {
 			statement = connection.createStatement();
 	        ResultSet rs = statement.executeQuery("SELECT * FROM threatdata");
+	        boolean success = statement.execute("INSERT blah");
+	        int[] ids = new int[50];
+	        int i = 0;
 	        while(rs.next()) {
+	        	ids[i] = rs.getInt("id");
 	        	int id = rs.getInt("id");
 	        	int threat = rs.getInt("threat");
 	        	result += "{" + id + ":" + threat + "} ";

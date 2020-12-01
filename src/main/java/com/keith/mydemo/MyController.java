@@ -35,8 +35,8 @@ public class MyController {
 		}
 		return "Something went wrong querying the twitter api";
 	}
-	@GetMapping("/databaseTest")
-	String databaseTest() {
+	@GetMapping("/databaseTest") 
+	String databaseTest(String param) {
 		return DatabaseTest.getAllData();
 	}
 }
