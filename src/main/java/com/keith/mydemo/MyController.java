@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class MyController {
-	
+
 	public MyController() {
 		DatabaseTest.initializeConnection();
 	}
@@ -15,13 +15,13 @@ public class MyController {
 	@PostMapping("/getScore")
 	Threat myMethod(@RequestBody String str) {
 		System.out.println("post request: " + str);
-			return new Threat("email", "e@gmail.com");
-					//"{threatlevel:" + new Random().nextInt(1000)+ "}";
+		return new Threat("email", "e@gmail.com");
+		// "{threatlevel:" + new Random().nextInt(1000)+ "}";
 	}
-	
+
 	@GetMapping("/twitterTest")
 	String twitterTest(String username) {
-		if(username == null) {
+		if (username == null) {
 			username = "TwitterEng";
 		}
 		try {
@@ -35,8 +35,14 @@ public class MyController {
 		}
 		return "Something went wrong querying the twitter api";
 	}
+
 	@GetMapping("/databaseTest")
 	String databaseTest() {
 		return DatabaseTest.getAllData();
+	}
+
+	@GetMapping("/databaseTest2")
+	String databaseTest2() {
+		return DatabaseTest.putData();
 	}
 }
