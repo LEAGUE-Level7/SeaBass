@@ -3,6 +3,7 @@ package com.keith.mydemo;
 import java.io.*;
 import java.net.*;
 
+import org.json.*;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -57,7 +58,18 @@ public class MyController {
 			return "Specify a user, dummy!";
 		}
 		try {
-			return Twitter.getLatest(user);
+			// This parses the json of the tweet results 
+			String ret = "tweets:\n";
+			JSONObject jsonobj = new JSONObject(Twitter.getLatest(user));
+			JSONArray tweetlist = jsonobj.getJSONArray("data");
+			for(int i = 0; i < tweetlist.length(); i++) {
+				System.out.println(tweetlist.get(i));
+				ret += "tweet " + i + ": " + tweetlist.get(i) + "\n";
+			}
+			for(String key : jsonobj.keySet()) {
+				System.out.println(jsonobj.get(key));
+			}
+			return ret;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
