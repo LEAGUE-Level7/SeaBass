@@ -47,7 +47,7 @@ public class DatabaseTest {
 		Statement statement;
 		String result = "";
 		int totalIdVals = 0;
-		int numThreats = 0;
+		int numThreats = 1;
 		try {
 			statement = connection.createStatement();
 			statement.execute("INSERT INTO threatdata(threat) VALUES (35)");

@@ -19,13 +19,30 @@ public class MyController {
 		// "{threatlevel:" + new Random().nextInt(1000)+ "}";
 	}
 
-	@GetMapping("/twitterTest")
-	String twitterTest(String username) {
+	@GetMapping("/twitterUser")
+	String twitterUser(String username) {
 		if (username == null) {
-			username = "TwitterEng";
+			username = "elonmusk";
 		}
 		try {
-			return Twitter.dostuff(username);
+			return Twitter.showUser(username);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "Something went wrong querying the twitter api";
+	}
+
+	@GetMapping("/twitterSearch")
+	String twitterSearch(String searchContent) {
+		if (searchContent == null) {
+			searchContent = "keith";
+		}
+		try {
+			return Twitter.showSearch(searchContent);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
