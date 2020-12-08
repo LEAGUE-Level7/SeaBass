@@ -1,6 +1,7 @@
 package com.keith.mydemo;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DatabaseTest {
 	private static Connection connection = null;
@@ -8,7 +9,8 @@ public class DatabaseTest {
 	public static void initializeConnection() {
 		try {
 			Class.forName("org.postgresql.Driver");
-			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/seabassdox", "postgres", "asdf");
+			String pgpassword = System.getenv("PG_PASSWORD");
+			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/seabassdox", "postgres", pgpassword);
 			System.out.println("Connected to database!");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -16,7 +18,6 @@ public class DatabaseTest {
 			System.err.println("FAILED TO CONNECT TO POSTGRES DATABASE");
 			connection = null;
 		}
-
 	}
 
 	public static String getAllData() {
@@ -27,12 +28,19 @@ public class DatabaseTest {
 		String result = "";
 		try {
 			statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery("SELECT * FROM threatdata");
-			while (rs.next()) {
-				int id = rs.getInt("id");
-				int threat = rs.getInt("threat");
-				result += "{" + id + ":" + threat + "} ";
-			}
+	        ResultSet rs = statement.executeQuery("SELECT * FROM threatdata");
+	        int numbers = 0;
+	        int total = 0;
+	        while(rs.next()) {
+	        	int id = rs.getInt("id");
+	        	int threat = rs.getInt("threat");
+	        	result += "{" + id + ":" + threat + "} ";
+	        	total+=threat;
+	        	numbers++;
+	        }
+	        if(numbers !=0) {
+	        	result+="Average: "+total/numbers;
+	        }
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -68,5 +76,19 @@ public class DatabaseTest {
 		}
 		return result;
 	}
-
+	
+	 public static String putSomeData(String number) {
+		 if(connection == null) {
+			 return "database error";
+		 }
+        Statement statement;
+        try {
+			statement = connection.createStatement();
+			boolean rs = statement.execute("INSERT INTO public.threatdata(threat) VALUES("+number+");");
+        }catch (SQLException e) {
+        	e.printStackTrace();
+        	return "oh no it didn't work";
+        }
+		return "yay it worked";
+	 }
 }

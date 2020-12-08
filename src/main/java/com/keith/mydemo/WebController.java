@@ -14,8 +14,4 @@ public class WebController {
 	String redirectMethod() {
 		return "redirect.html";
 	}
-	@GetMapping("/test")
-	String testMethod() {
-		return "redirect.html";
-	}
 }
