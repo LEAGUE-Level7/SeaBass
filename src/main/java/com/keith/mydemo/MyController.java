@@ -25,7 +25,39 @@ public class MyController {
 			username = "TwitterEng";
 		}
 		try {
-			return Twitter.dostuff(username);
+			return Twitter.doUser(username);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "Something went wrong querying the twitter api";
+	}
+	@GetMapping("/twitterTest2")
+	String twitterTest2(String ids) {
+		if(ids == null) {
+			ids = "20";
+		}
+		try {
+			return Twitter.dotweet(ids);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "Something went wrong querying the twitter api";
+	}
+	@GetMapping("/getlatesttweet")
+	String getLatestTweet(String user) {
+		if(user == null) {
+			return "Specify a user, dummy!";
+		}
+		try {
+			return Twitter.getLatest(user);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
