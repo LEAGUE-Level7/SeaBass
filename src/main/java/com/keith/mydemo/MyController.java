@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class MyController {
-	
+
 	public MyController() {
 		DatabaseTest.initializeConnection();
 	}
@@ -16,17 +16,17 @@ public class MyController {
 	@PostMapping("/getScore")
 	Threat myMethod(@RequestBody String str) {
 		System.out.println("post request: " + str);
-			return new Threat("email", "e@gmail.com");
-					//"{threatlevel:" + new Random().nextInt(1000)+ "}";
+		return new Threat("email", "e@gmail.com");
+		// "{threatlevel:" + new Random().nextInt(1000)+ "}";
 	}
-	
-	@GetMapping("/twitterTest")
-	String twitterTest(String username) {
-		if(username == null) {
-			username = "TwitterEng";
+
+	@GetMapping("/twitterUser")
+	String twitterUser(String username) {
+		if (username == null) {
+			username = "elonmusk";
 		}
 		try {
-			return Twitter.doUser(username);
+			return Twitter.showUser(username);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -79,12 +79,33 @@ public class MyController {
 		}
 		return "Something went wrong querying the twitter api";
 	}
+
+	@GetMapping("/twitterSearch")
+	String twitterSearch(String searchContent) {
+		if (searchContent == null) {
+			searchContent = "keith";
+		}
+		try {
+			return Twitter.showSearch(searchContent);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "Something went wrong querying the twitter api";
+	}
+
 	@GetMapping("/databaseTest")
 	String databaseTest() {
 		return DatabaseTest.getAllData();
 	}
 	@GetMapping("/databaseTest2")
 	String databaseTest2(String number) {
+		if(number == null) {
+			return DatabaseTest.putData();
+		}
 		return DatabaseTest.putSomeData(number);
 	}
 }
