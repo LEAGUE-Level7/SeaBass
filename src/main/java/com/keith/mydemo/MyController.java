@@ -45,9 +45,10 @@ public class MyController {
 		}
 		return "Something went wrong querying the twitter api";
 	}
+
 	@GetMapping("/twitterTest2")
 	String twitterTest2(String ids) {
-		if(ids == null) {
+		if (ids == null) {
 			ids = "20";
 		}
 		try {
@@ -61,21 +62,23 @@ public class MyController {
 		}
 		return "Something went wrong querying the twitter api";
 	}
+
 	@GetMapping("/getlatesttweet")
 	String getLatestTweet(String user) {
-		if(user == null) {
+		user = "elonmusk";
+		if (user == null) {
 			return "Specify a user, dummy!";
 		}
 		try {
-			// This parses the json of the tweet results 
+			// This parses the json of the tweet results
 			String ret = "tweets:\n";
 			JSONObject jsonobj = new JSONObject(Twitter.getLatest(user));
 			JSONArray tweetlist = jsonobj.getJSONArray("data");
-			for(int i = 0; i < tweetlist.length(); i++) {
+			for (int i = 0; i < tweetlist.length(); i++) {
 				System.out.println(tweetlist.get(i));
 				ret += "tweet " + i + ": " + tweetlist.get(i) + "\n";
 			}
-			for(String key : jsonobj.keySet()) {
+			for (String key : jsonobj.keySet()) {
 				System.out.println(jsonobj.get(key));
 			}
 			return ret;
@@ -110,11 +113,25 @@ public class MyController {
 	String databaseTest() {
 		return DatabaseTest.getAllData();
 	}
+
 	@GetMapping("/databaseTest2")
 	String databaseTest2(String number) {
-		if(number == null) {
+		if (number == null) {
 			return DatabaseTest.putData();
 		}
 		return DatabaseTest.putSomeData(number);
+	}
+	
+	@GetMapping("/filterStreams")
+	void filterStream() {
+		try {
+			Twitter.showFilteredStream();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
