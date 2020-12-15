@@ -6,12 +6,12 @@ if (sampleForm) {
 	sampleForm.addEventListener("submit", (event) => {
 		event.preventDefault();
 		console.log("form submitted");
-		postData('http://localhost:8080/getScore', { username: "BritishAPT" })
+		postData('http://localhost/getScore', { username: "BritishAPT" })
 			.then(data => {
 				bruh = data;
 				console.log(data);
 				myStorage.setItem("object", JSON.stringify(data))
-				window.location.href = "http://localhost:8080/redirect";// JSON data parsed by `data.json()` call
+				window.location.href = "http://localhost/redirect";// JSON data parsed by `data.json()` call
 			});
 
 	})
