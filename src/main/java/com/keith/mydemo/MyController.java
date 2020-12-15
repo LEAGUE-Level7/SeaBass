@@ -2,6 +2,7 @@ package com.keith.mydemo;
 
 import java.io.*;
 import java.net.*;
+import java.util.Random;
 
 import org.json.*;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +15,17 @@ public class MyController {
 	}
 
 	@PostMapping("/getScore")
-	Threat myMethod(@RequestBody String str) {
-		System.out.println("post request: " + str);
-		return new Threat("email", "e@gmail.com");
+	Threat myMethod(@RequestBody String body) {
+		System.out.println("post request: " + body);
+		JSONObject jsonobj = new JSONObject(body);
+		String username = jsonobj.getString("username");
+		System.out.println(username);
+		String result = getLatestTweet(username);
+		Threat threat = new Threat();
+		threat.setLatestTweet(result);
+		threat.setUsername(username);
+		threat.setThreatLevel(new Random().nextInt(100));
+		return threat;
 		// "{threatlevel:" + new Random().nextInt(1000)+ "}";
 	}
 
