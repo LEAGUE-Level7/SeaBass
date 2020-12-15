@@ -3,32 +3,29 @@ package com.keith.mydemo;
 import java.util.HashMap;
 
 public class Threat {
-	HashMap<String, String> data = new HashMap<String, String>();
-
-	public Threat(String platform, String username) {
-		data.put(platform, username);
+	String username;
+	String latestTweet;
+	int threatLevel;
+	public String getUsername() {
+		return username;
 	}
-
-	public Threat(int favoriteNumber) {
-
+	public void setUsername(String username) {
+		this.username = username;
 	}
-
-	int threatLvl = 2;
-
-	public HashMap<String, String> getData() {
-		return data;
+	public String getLatestTweet() {
+		return latestTweet;
 	}
-
-	public void setData(HashMap<String, String> data) {
-		this.data = data;
+	public void setLatestTweet(String latestTweet) {
+		this.latestTweet = latestTweet;
 	}
-
-	public int getThreatLvl() {
-		return threatLvl;
+	public int getThreatLevel() {
+		return threatLevel;
 	}
-
-	public void setThreatLvl(int threatLvl) {
-		this.threatLvl = threatLvl;
+	public void setThreatLevel(int threatLevel) {
+		this.threatLevel = threatLevel;
 	}
-
+	
+	
+	
+	
 }
