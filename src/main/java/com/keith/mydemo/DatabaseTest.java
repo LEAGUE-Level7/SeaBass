@@ -10,7 +10,8 @@ public class DatabaseTest {
 		try {
 			Class.forName("org.postgresql.Driver");
 			String pgpassword = System.getenv("PG_PASSWORD");
-			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/seabassdox", "postgres", pgpassword);
+			connection = DriverManager.getConnection("jdbc:postgresql://seabassdb4.westus.cloudapp.azure.com/seabassdox", "postgres", pgpassword);
+
 			System.out.println("Connected to database!");
 		} catch (Exception e) {
 			e.printStackTrace();
