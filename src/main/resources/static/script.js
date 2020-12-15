@@ -1,5 +1,5 @@
 let bruh = {};
-
+const myStorage = window.localStorage
 
 const sampleForm = document.getElementById("sampleform");
 if (sampleForm) {
@@ -10,7 +10,8 @@ if (sampleForm) {
 			.then(data => {
 				bruh = data;
 				console.log(data);
-				window.location.href = "http://localhost:8080/redirect?threatlevel=" + data.threatLevel;// JSON data parsed by `data.json()` call
+				myStorage.setItem("object", JSON.stringify(data))
+				window.location.href = "http://localhost:8080/redirect";// JSON data parsed by `data.json()` call
 			});
 
 	})
@@ -33,13 +34,4 @@ async function postData(url = '', data = {}) {
 	return response.json(); // parses JSON response into native JavaScript objects
 }
 
-(function showThreatLevel() {
-	console.log(bruh)
-	const urlParams = new URLSearchParams(document.location.search);
-	const threatLevel = urlParams.get('threatlevel')
-	console.log(threatLevel);
 
-	let threatLevelValue = document.getElementById("threatLevelTitle");
-
-	threatLevelValue.innerHTML = "your threat level is: " + threatLevel;
-})();
