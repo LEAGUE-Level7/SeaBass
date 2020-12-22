@@ -6,6 +6,13 @@ public class Threat {
 	String username;
 	String latestTweet;
 	int threatLevel;
+	String message;
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
 	public String getUsername() {
 		return username;
 	}
@@ -24,6 +31,7 @@ public class Threat {
 	public void setThreatLevel(int threatLevel) {
 		this.threatLevel = threatLevel;
 	}
+
 	
 	
 	

@@ -30,9 +30,9 @@ public class MyController {
 			threat.setLatestTweet(result);
 		}
 		else {
-//			threat.setMessage("Account does not exist!");
+			threat.setMessage("Account does not exist!");
 		}
-
+		threat.setMessage("All good");
 		threat.setUsername(username);
 		threat.setThreatLevel(threatLevel);
 		
