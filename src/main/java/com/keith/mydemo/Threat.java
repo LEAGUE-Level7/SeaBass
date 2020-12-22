@@ -3,6 +3,13 @@ package com.keith.mydemo;
 import java.util.HashMap;
 
 public class Threat {
+
+	String username;
+	String latestTweet;
+	int threatLevel;
+	String message;
+
+	
 	HashMap<String, String> data = new HashMap<String, String>();
 
 	public Threat(String platform, String username) {
@@ -31,4 +38,17 @@ public class Threat {
 		this.threatLvl = threatLvl;
 	}
 
+	public String getUsername() {
+		return username;
+
+	}
+
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	
 }

@@ -13,10 +13,31 @@ public class MyController {
 	}
 
 	@PostMapping("/getScore")
-	Threat myMethod(@RequestBody String str) {
-		System.out.println("post request: " + str);
-			return new Threat("email", "e@gmail.com");
-					//"{threatlevel:" + new Random().nextInt(1000)+ "}";
+
+	Threat myMethod(@RequestBody String body) {
+		System.out.println("post request: " + body);
+		JSONObject jsonobj = new JSONObject(body);
+		String username = jsonobj.getString("username");
+		
+		int threatLevel = 0;
+		Threat threat = new Threat();
+		
+		boolean exists = true; //Twitter.doesAccountExist(username);
+		if(exists) {
+			threatLevel = 1;
+			String result = getLatestTweet(username);
+			threat.setLatestTweet(result);
+		}
+		else {
+		threat.setMessage("Account does not exist!");
+		}
+		
+		threat.setUsername(username);
+		threat.setThreatLevel(threatLevel);
+		
+		DatabaseTest.putSomeData(threatLevel);
+		
+		return threat;
 	}
 	
 	@GetMapping("/twitterTest")
