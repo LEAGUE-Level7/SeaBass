@@ -19,14 +19,26 @@ public class MyController {
 		System.out.println("post request: " + body);
 		JSONObject jsonobj = new JSONObject(body);
 		String username = jsonobj.getString("username");
-		System.out.println(username);
-		String result = getLatestTweet(username);
+		
+		int threatLevel = 0;
 		Threat threat = new Threat();
-		threat.setLatestTweet(result);
+		
+		boolean exists = Twitter.doesAccountExist(username);
+		if(exists) {
+			threatLevel = 1;
+			String result = getLatestTweet(username);
+			threat.setLatestTweet(result);
+		}
+		else {
+			threat.setMessage("Account does not exist!");
+		}
+		
 		threat.setUsername(username);
-		threat.setThreatLevel(new Random().nextInt(100));
+		threat.setThreatLevel(threatLevel);
+		
+		DatabaseTest.putSomeData(threatLevel);
+		
 		return threat;
-		// "{threatlevel:" + new Random().nextInt(1000)+ "}";
 	}
 
 	@GetMapping("/twitterUser")

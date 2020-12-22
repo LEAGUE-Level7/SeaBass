@@ -1,6 +1,7 @@
 const myStorage = window.localStorage
 function showThreatLevel() {
 	let data = JSON.parse(myStorage.getItem("object"))
+	console.log(data)
 	console.log(data.threatLevel)
 	const threatLevel = data.threatLevel
 	console.log(threatLevel);
