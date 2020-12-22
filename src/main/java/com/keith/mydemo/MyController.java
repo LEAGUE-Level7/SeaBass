@@ -83,9 +83,8 @@ public class MyController {
 
 	@GetMapping("/getlatesttweet")
 	String getLatestTweet(String user) {
-		user = "elonmusk";
 		if (user == null) {
-			return "Specify a user, dummy!";
+			user = "elonmusk";
 		}
 		try {
 			// This parses the json of the tweet results
@@ -93,12 +92,12 @@ public class MyController {
 			JSONObject jsonobj = new JSONObject(Twitter.getLatest(user));
 			JSONArray tweetlist = jsonobj.getJSONArray("data");
 			for (int i = 0; i < tweetlist.length(); i++) {
-				System.out.println(tweetlist.get(i));
+//				System.out.println(tweetlist.get(i));
 				ret += "tweet " + i + ": " + tweetlist.get(i) + "\n";
 			}
-			for (String key : jsonobj.keySet()) {
-				System.out.println(jsonobj.get(key));
-			}
+//			for (String key : jsonobj.keySet()) {
+//				System.out.println(jsonobj.get(key));
+//			}
 			return ret;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
