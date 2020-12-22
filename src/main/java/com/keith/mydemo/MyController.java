@@ -38,7 +38,7 @@ public class MyController {
 		
 		if(DatabaseTest.isConnected()) {
 			double worldAverage = DatabaseTest.getWorldAverage();
-			threat.setWorldAverage(worldAverage);
+//			threat.setWorldAverage(worldAverage);
 			if (checked) {
 				DatabaseTest.putSomeData("" + threatLevel);
 			}
