@@ -3,11 +3,12 @@ const myStorage = window.localStorage
 
 const sampleForm = document.getElementById("sampleform");
 if (sampleForm) {
-	let checkbox = document.getElementById("sampleform");
+	let accountInputField = document.getElementById("target");
+	let collectDataCheckbox = document.getElementById("collectDataCheckBox");
 	sampleForm.addEventListener("submit", (event) => {
 		event.preventDefault();
 		console.log("form submitted");
-		postData('http://localhost/getScore', { username: "BritishAPT" })
+	    postData('http://localhost/getScore', { username: accountInputField.value, collectdata: collectDataCheckBox.checked })
 			.then(data => {
 				bruh = data;
 				console.log(data);
