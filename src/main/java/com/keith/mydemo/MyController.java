@@ -15,36 +15,41 @@ public class MyController {
 	}
 
 	@PostMapping("/getScore")
-	Threat myMethod(@RequestBody String body) {
+	Threat myMethod(@RequestBody String body) throws IOException, URISyntaxException {
 		System.out.println("post request: " + body);
 		JSONObject jsonobj = new JSONObject(body);
 		String username = jsonobj.getString("username");
-		
+
 		int threatLevel = 0;
 		Threat threat = new Threat();
-		
-		boolean exists = Twitter.doesAccountExist(username);
-		if(exists) {
+
+		boolean exists = false;
+
+		exists = Twitter.doesAccountExist(username);
+
+		if (exists) {
 			threatLevel = 1;
+			//String result = getLatestTweet(username);
+			//threat.setLatestTweet(result);
+		} else {
+			// threat.setMessage("Account does not exist!");
+			threatLevel = 0;
 			String result = getLatestTweet(username);
 			threat.setLatestTweet(result);
 		}
-		else {
-			threat.setMessage("Account does not exist!");
-		}
-		
+
 		threat.setUsername(username);
 		threat.setThreatLevel(threatLevel);
-		
-		DatabaseTest.putSomeData(threatLevel);
-		
+
+		// DatabaseTest.putSomeData(threatLevel);
+
 		return threat;
 	}
 
 	@GetMapping("/twitterUser")
 	String twitterUser(String username) {
 		if (username == null) {
-			username = "elonmusk";
+			username = "12345szxcvu653hfdsy5643gfda";
 		}
 		try {
 			return Twitter.showUser(username);
@@ -133,7 +138,7 @@ public class MyController {
 		}
 		return DatabaseTest.putSomeData(number);
 	}
-	
+
 	@GetMapping("/filterStreams")
 	void filterStream() {
 		try {
