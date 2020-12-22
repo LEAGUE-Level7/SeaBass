@@ -19,25 +19,25 @@ public class MyController {
 		System.out.println("post request: " + body);
 		JSONObject jsonobj = new JSONObject(body);
 		String username = jsonobj.getString("username");
-		
+		boolean checked = jsonobj.getBoolean("collectdata");
 		int threatLevel = 0;
 		Threat threat = new Threat();
-		
+
 		boolean exists = Twitter.doesAccountExist(username);
-		if(exists) {
+		if (exists) {
 			threatLevel = 1;
 			String result = getLatestTweet(username);
 			threat.setLatestTweet(result);
-		}
-		else {
+		} else {
 			threat.setMessage("Account does not exist!");
 		}
-		
+
 		threat.setUsername(username);
 		threat.setThreatLevel(threatLevel);
-		
-		DatabaseTest.putSomeData(threatLevel);
-		
+		System.out.println(checked);
+		if (checked) {
+			DatabaseTest.putSomeData(threatLevel);
+		}
 		return threat;
 	}
 
@@ -133,7 +133,7 @@ public class MyController {
 		}
 		return DatabaseTest.putSomeData(number);
 	}
-	
+
 	@GetMapping("/filterStreams")
 	void filterStream() {
 		try {
