@@ -30,15 +30,20 @@ public class MyController {
 			threat.setLatestTweet(result);
 		}
 		else {
-//		threat.setMessage("Account does not exist!");
+//			threat.setMessage("Account does not exist!");
 		}
 
 		threat.setUsername(username);
 		threat.setThreatLevel(threatLevel);
-		System.out.println(checked);
-		if (checked) {
-			DatabaseTest.putSomeData("" + threatLevel);
+		
+		if(DatabaseTest.isConnected()) {
+			double worldAverage = DatabaseTest.getWorldAverage();
+			threat.setWorldAverage(worldAverage);
+			if (checked) {
+				DatabaseTest.putSomeData("" + threatLevel);
+			}
 		}
+		
 		return threat;
 	}
 

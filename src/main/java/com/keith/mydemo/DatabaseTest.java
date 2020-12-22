@@ -20,6 +20,16 @@ public class DatabaseTest {
 			connection = null;
 		}
 	}
+	
+	public static boolean isConnected() {
+		return connection == null;
+	}
+	
+	public static double getWorldAverage() {
+		// TODO query for world average and return it as a double.
+		// The getAllData() function below already does something similar
+		return 0;
+	}
 
 	public static String getAllData() {
 		if (connection == null) {
