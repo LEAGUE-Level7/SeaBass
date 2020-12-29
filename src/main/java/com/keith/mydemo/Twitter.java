@@ -45,6 +45,28 @@ public class Twitter {
 		    
 		    
 	}
+	
+	public static boolean doesAccountExist(String username) throws IOException, URISyntaxException {
+		String bearerToken = System.getenv("BEARER_TOKEN");
+		System.out.println(bearerToken);
+		if (null != bearerToken) {
+			// Replace comma separated usernames with usernames of your choice
+			String response = getUsers(username, bearerToken);
+			System.out.println(response);
+			
+			JSONObject jsonobj = new JSONObject(response);
+			if(jsonobj.has("errors")) {
+				System.out.println("There is an 'errors' field");
+				return false;
+			}
+			else if(jsonobj.has("data")) {
+				System.out.println("There is a 'data' field");
+				return true;
+			}
+			
+		}
+		return false;
+	}
 
 	public static String showUser(String username) throws IOException, URISyntaxException {
 		String bearerToken = System.getenv("BEARER_TOKEN");
@@ -352,5 +374,7 @@ public class Twitter {
 			return String.format(string, result.substring(0, result.length() - 1));
 		}
 	}
+
+	
 
 }
