@@ -10,7 +10,8 @@ public class DatabaseTest {
 		try {
 			Class.forName("org.postgresql.Driver");
 			String pgpassword = System.getenv("PG_PASSWORD");
-			connection = DriverManager.getConnection("jdbc:postgresql://seabassdb4.westus.cloudapp.azure.com/seabassdox", "postgres", pgpassword);
+			connection = DriverManager.getConnection("jdbc:postgresql://seabassdb4.westus.cloudapp.azure.com/seabassdox", "postgres",
+					pgpassword);
 
 			System.out.println("Connected to database!");
 		} catch (Exception e) {
@@ -20,42 +21,45 @@ public class DatabaseTest {
 			connection = null;
 		}
 	}
-	
+
 	public static boolean isConnected() {
 		return connection == null;
 	}
-	
-	public static double getWorldAverage() {
+
+	public static double getWorldAverage() throws SQLException {
 		// TODO query for world average and return it as a double.
 		// The getAllData() function below already does something similar
-		return 0;
+		Statement statement;
+		statement = connection.createStatement();
+		ResultSet rs = statement.executeQuery("SELECT * FROM threatdata");
+
+		double avg = 0.0;
+		double numbers = 0.0;
+		int total = 0;
+
+		while (rs.next()) {
+			int id = rs.getInt("id");
+			int threat = rs.getInt("threat");
+			// result += "{" + id + ":" + threat + "} ";
+			total += threat;
+			numbers++;
+		}
+		if (numbers != 0) {
+			avg += total / numbers;
+		}
+
+		return avg;
 	}
 
-	public static String getAllData() {
+	public static String getAllData() throws SQLException {
 		if (connection == null) {
 			return "database error";
 		}
-		Statement statement;
+
 		String result = "";
-		try {
-			statement = connection.createStatement();
-	        ResultSet rs = statement.executeQuery("SELECT * FROM threatdata");
-	        int numbers = 0;
-	        int total = 0;
-	        while(rs.next()) {
-	        	int id = rs.getInt("id");
-	        	int threat = rs.getInt("threat");
-	        	result += "{" + id + ":" + threat + "} ";
-	        	total+=threat;
-	        	numbers++;
-	        }
-	        if(numbers !=0) {
-	        	result+="Average: "+total/numbers;
-	        }
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		result += "Average: " + getWorldAverage();
+
 		return result;
 	}
 
@@ -87,19 +91,19 @@ public class DatabaseTest {
 		}
 		return result;
 	}
-	
-	 public static String putSomeData(String number) {
-		 if(connection == null) {
-			 return "database error";
-		 }
-        Statement statement;
-        try {
+
+	public static String putSomeData(String number) {
+		if (connection == null) {
+			return "database error";
+		}
+		Statement statement;
+		try {
 			statement = connection.createStatement();
-			boolean rs = statement.execute("INSERT INTO public.threatdata(threat) VALUES("+number+");");
-        }catch (SQLException e) {
-        	e.printStackTrace();
-        	return "oh no it didn't work";
-        }
+			boolean rs = statement.execute("INSERT INTO public.threatdata(threat) VALUES(" + number + ");");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "oh no it didn't work";
+		}
 		return "yay it worked";
-	 }
+	}
 }

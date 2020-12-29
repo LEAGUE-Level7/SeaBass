@@ -2,6 +2,7 @@ package com.keith.mydemo;
 
 import java.io.*;
 import java.net.*;
+import java.sql.SQLException;
 import java.util.Random;
 
 import org.json.*;
@@ -38,7 +39,12 @@ public class MyController {
 		threat.setThreatLevel(threatLevel);
 
 		if (DatabaseTest.isConnected()) {
-			double worldAverage = DatabaseTest.getWorldAverage();
+			try {
+				double worldAverage = DatabaseTest.getWorldAverage();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			// threat.setWorldAverage(worldAverage);
 			if (checked) {
 				DatabaseTest.putSomeData("" + threatLevel);
@@ -129,7 +135,13 @@ public class MyController {
 
 	@GetMapping("/databaseTest")
 	String databaseTest() {
-		return DatabaseTest.getAllData();
+		try {
+			return DatabaseTest.getAllData();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@GetMapping("/databaseTest2")
