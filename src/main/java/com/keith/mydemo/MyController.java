@@ -28,13 +28,15 @@ public class MyController {
 			threatLevel = 1;
 			String result = getLatestTweet(username);
 			threat.setLatestTweet(result);
+			threat.setMessage("All good");
+			threat.setUsername(username);
+			threat.setThreatLevel(threatLevel);
 		}
 		else {
 			threat.setMessage("Account does not exist!");
+			
 		}
-		threat.setMessage("All good");
-		threat.setUsername(username);
-		threat.setThreatLevel(threatLevel);
+		
 		
 		if(DatabaseTest.isConnected()) {
 			double worldAverage = DatabaseTest.getWorldAverage();
@@ -43,6 +45,7 @@ public class MyController {
 				DatabaseTest.putSomeData("" + threatLevel);
 			}
 		}
+		
 		
 		return threat;
 	}
@@ -88,17 +91,9 @@ public class MyController {
 		}
 		try {
 			// This parses the json of the tweet results
-			String ret = "tweets:\n";
 			JSONObject jsonobj = new JSONObject(Twitter.getLatest(user));
-			JSONArray tweetlist = jsonobj.getJSONArray("data");
-			for (int i = 0; i < tweetlist.length(); i++) {
-//				System.out.println(tweetlist.get(i));
-				ret += "tweet " + i + ": " + tweetlist.get(i) + "\n";
-			}
-//			for (String key : jsonobj.keySet()) {
-//				System.out.println(jsonobj.get(key));
-//			}
-			return ret;
+			String tweetlist = jsonobj.getJSONArray("data").getJSONObject(0).getString("text");
+			return tweetlist;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
