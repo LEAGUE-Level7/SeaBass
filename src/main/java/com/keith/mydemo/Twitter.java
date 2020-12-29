@@ -53,10 +53,17 @@ public class Twitter {
 			// Replace comma separated usernames with usernames of your choice
 			String response = getUsers(username, bearerToken);
 			System.out.println(response);
-			if(response.equals(null)) {
+			
+			JSONObject jsonobj = new JSONObject(response);
+			if(jsonobj.has("errors")) {
+				System.out.println("There is an 'errors' field");
 				return false;
 			}
-			return true;
+			else if(jsonobj.has("data")) {
+				System.out.println("There is a 'data' field");
+				return true;
+			}
+			
 		}
 		return false;
 	}
