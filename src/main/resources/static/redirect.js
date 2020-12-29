@@ -7,6 +7,10 @@ function showThreatLevel() {
 	let threatLevelValue = document.getElementById("threatLevelTitle");
 	let latestTweetValue = document.getElementById("latestTweet");
 	threatLevelValue.innerHTML = "Your Threat Level is: " + threatLevel;
-	latestTweetValue.innerHTML = "Latest Tweet: "+latestTweet;
+	if(latestTweet!=null){
+		latestTweetValue.innerHTML = "Latest Tweet: "+latestTweet;
+	}else{
+		latestTweetValue.innerHTML = " ";
+	}
 }
 showThreatLevel()

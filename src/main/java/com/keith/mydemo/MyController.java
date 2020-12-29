@@ -27,14 +27,13 @@ public class MyController {
 		boolean exists = Twitter.doesAccountExist(username);
 
 		if (exists) {
-			threat.setMessage("All good");
-			threatLevel = 1;
+			
 
 			String result = getLatestTweet(username);
 			threat.setLatestTweet(result);
 			threat.setMessage("All good");
 			threat.setUsername(username);
-			threat.setThreatLevel(threatLevel);
+			threat.setThreatLevel(1);
 		} else {
 			threat.setMessage("Account does not exist!");
 			threatLevel = 0;
