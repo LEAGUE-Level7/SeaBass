@@ -32,6 +32,7 @@ public class MyController {
 			String result = getLatestTweet(username);
 			threat.setLatestTweet(result);
 			threat.setMessage("All good");
+
 			threat.setUsername(username);
 			threat.setThreatLevel(1);
 		} else {
