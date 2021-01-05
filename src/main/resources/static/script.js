@@ -1,19 +1,25 @@
 let bruh = {};
 const myStorage = window.localStorage
 
+function addSearchObject(value){
+	console.log(value);
+}
+
 const sampleForm = document.getElementById("sampleform");
 if (sampleForm) {
 	let accountInputField = document.getElementById("target");
-	let collectDataCheckbox = document.getElementById("collectDataCheckBox");
+	let collectDataCheckbox = document.getElementById("collectDataCheckbox");
 	sampleForm.addEventListener("submit", (event) => {
 		event.preventDefault();
 		console.log("form submitted");
-	    postData('http://localhost/getScore', { username: accountInputField.value, collectdata: collectDataCheckBox.checked })
+	    postData('http://localhost/getScore', { username: accountInputField.value, collectdata: collectDataCheckbox.checked })
 			.then(data => {
 				bruh = data;
 				console.log(data);
 				myStorage.setItem("object", JSON.stringify(data))
 				window.location.href = "http://localhost/redirect";// JSON data parsed by `data.json()` call
+				let result = JSON.parse(myStorage.getItem("object"))
+				console.log(JSON.stringify(result));
 			});
 
 	})
