@@ -7,6 +7,7 @@ public class Threat {
 	String latestTweet;
 	int threatLevel;
 	String message;
+	double worldAvg;
 	public String getMessage() {
 		return message;
 	}
@@ -31,7 +32,12 @@ public class Threat {
 	public void setThreatLevel(int threatLevel) {
 		this.threatLevel = threatLevel;
 	}
-
+	public double getWorldAvg() {
+		return worldAvg;
+	}
+	public void setWorldAverage(double worldAvg) {
+		this.worldAvg = worldAvg;
+	}
 	
 	
 	
