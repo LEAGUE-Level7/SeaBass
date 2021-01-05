@@ -169,16 +169,27 @@ public class Twitter {
 		return "There was a problem getting you bearer token. Please make sure you set the BEARER_TOKEN environment variable";
 	}
 
-	public static String getLatest(String user) throws IOException, URISyntaxException {
+	
+	/***
+	 * Returns and array of strings. Each string is a recent tweet from the user.
+	 */
+	public static ArrayList<String> getLatestTweets(String user) throws IOException, URISyntaxException {
 		String bearerToken = System.getenv("BEARER_TOKEN");
 		System.out.println(bearerToken);
+		ArrayList<String> list = new ArrayList<>();
 		if (null != bearerToken) {
 			// Replace comma separated usernames with usernames of your choice
-			String response = getLatestTweet(user, bearerToken);
-			System.out.println(response);
-			return response;
+			String response = getLatestTweetsJSON(user, bearerToken);
+			JSONObject jsonobj = new JSONObject(response);
+			JSONArray jsonarr = jsonobj.getJSONArray("data");
+			for(int i = 0; i < jsonarr.length(); i++) {
+				JSONObject arrayelement = jsonarr.getJSONObject(i);
+				System.out.println(arrayelement.getString("id"));
+				System.out.println(arrayelement.getString("text"));
+				list.add(arrayelement.getString("text"));
+			}
 		}
-		return "There was a problem getting you bearer token. Please make sure you set the BEARER_TOKEN environment variable";
+		return list;
 	}
 
 	private static String getTweets(String ids, String bearerToken) throws IOException, URISyntaxException {
@@ -205,7 +216,10 @@ public class Twitter {
 		return userResponse;
 	}
 
-	private static String getLatestTweet(String user, String bearerToken) throws IOException, URISyntaxException {
+	/**
+	 * Gets latest tweets from account. Returns unparsed raw and wriggling json string
+	 */
+	private static String getLatestTweetsJSON(String user, String bearerToken) throws IOException, URISyntaxException {
 		String userResponse = null;
 
 		HttpClient httpClient = HttpClients.custom()

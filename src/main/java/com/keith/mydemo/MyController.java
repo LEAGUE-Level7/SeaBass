@@ -3,7 +3,7 @@ package com.keith.mydemo;
 import java.io.*;
 import java.net.*;
 import java.sql.SQLException;
-import java.util.Random;
+import java.util.*;
 
 import org.json.*;
 import org.springframework.web.bind.annotation.*;
@@ -99,9 +99,8 @@ public class MyController {
 		}
 		try {
 			// This parses the json of the tweet results
-			JSONObject jsonobj = new JSONObject(Twitter.getLatest(user));
-			String tweetlist = jsonobj.getJSONArray("data").getJSONObject(0).getString("text");
-			return tweetlist;
+			ArrayList<String> tweets = Twitter.getLatestTweets(user);
+			return tweets.get(0);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
