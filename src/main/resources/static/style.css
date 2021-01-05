@@ -75,3 +75,8 @@ span {
 .hidden {
     display: none;
 }
+#canvas {
+	margin: auto;
+	border: 2px solid #12AF86;
+	display: block
+}
