@@ -23,7 +23,7 @@ public class DatabaseTest {
 	}
 
 	public static boolean isConnected() {
-		return connection == null;
+		return connection != null;
 	}
 
 	public static double getWorldAverage() throws SQLException {
