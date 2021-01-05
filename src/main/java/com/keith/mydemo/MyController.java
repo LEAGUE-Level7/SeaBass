@@ -39,9 +39,6 @@ public class MyController {
 			threatLevel = 0;
 		}
 
-		threat.setUsername(username);
-		threat.setThreatLevel(threatLevel);
-
 		if (DatabaseTest.isConnected()) {
 			double worldAverage = DatabaseTest.getWorldAverage();
 			// threat.setWorldAverage(worldAverage);
