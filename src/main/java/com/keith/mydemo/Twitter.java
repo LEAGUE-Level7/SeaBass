@@ -29,23 +29,23 @@ public class Twitter {
 
 	// To set your enviornment variables in your terminal run the following line:
 	// export 'BEARER_TOKEN'='<your_bearer_token>'
-	
-	public static void showFilteredStream() throws IOException, URISyntaxException{
-		 String bearerToken = System.getenv("BEARER_TOKEN");
-		    if (null != bearerToken) {
-		      Map<String, String> rules = new HashMap<>();
-		      rules.put("Keithslife has:images", "keith images");
-		      rules.put("Keithslife has:media", "keith media");
-		      rules.put("Keithslife has:mentions", "keith mention");
-		      setupRules(bearerToken, rules);
-		      connectStream(bearerToken);
-		    } else {
-		      System.out.println("There was a problem getting you bearer token. Please make sure you set the BEARER_TOKEN environment variable");
-		    }
-		    
-		    
+
+	public static void showFilteredStream() throws IOException, URISyntaxException {
+		String bearerToken = System.getenv("BEARER_TOKEN");
+		if (null != bearerToken) {
+			Map<String, String> rules = new HashMap<>();
+			rules.put("Keithslife has:images", "keith images");
+			rules.put("Keithslife has:media", "keith media");
+			rules.put("Keithslife has:mentions", "keith mention");
+			setupRules(bearerToken, rules);
+			connectStream(bearerToken);
+		} else {
+			System.out.println(
+					"There was a problem getting you bearer token. Please make sure you set the BEARER_TOKEN environment variable");
+		}
+
 	}
-	
+
 	public static boolean doesAccountExist(String username) throws IOException, URISyntaxException {
 		String bearerToken = System.getenv("BEARER_TOKEN");
 		System.out.println(bearerToken);
@@ -53,17 +53,16 @@ public class Twitter {
 			// Replace comma separated usernames with usernames of your choice
 			String response = getUsers(username, bearerToken);
 			System.out.println(response);
-			
+
 			JSONObject jsonobj = new JSONObject(response);
-			if(jsonobj.has("errors")) {
+			if (jsonobj.has("errors")) {
 				System.out.println("There is an 'errors' field");
 				return false;
-			}
-			else if(jsonobj.has("data")) {
+			} else if (jsonobj.has("data")) {
 				System.out.println("There is a 'data' field");
 				return true;
 			}
-			
+
 		}
 		return false;
 	}
@@ -243,13 +242,6 @@ public class Twitter {
 		return userResponse;
 	}
 
-	
-	
-	
-	
-	
-	
-	
 	/*
 	 * This method calls the filtered stream endpoint and streams Tweets from it
 	 */
@@ -388,7 +380,5 @@ public class Twitter {
 			return String.format(string, result.substring(0, result.length() - 1));
 		}
 	}
-
-	
 
 }

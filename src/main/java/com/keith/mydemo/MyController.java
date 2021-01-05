@@ -1,12 +1,19 @@
 package com.keith.mydemo;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.io.*;
 import java.net.*;
 import java.sql.SQLException;
 import java.util.*;
 
-import org.json.*;
-import org.springframework.web.bind.annotation.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MyController {
@@ -27,13 +34,24 @@ public class MyController {
 		Threat threat = new Threat();
 
 		boolean exists = Twitter.doesAccountExist(username);
-
+		ArrayList<String> suspiciousTweets = new ArrayList<String>();
 		if (exists) {
-			
-
-			String result = getLatestTweet(username);
-			threat.setLatestTweet(result);
+			threatLevel = 1;
 			threat.setMessage("All good");
+			System.out.println(Twitter.getLatest(username));
+			if (Twitter.getLatest(username).contains("birthday")) {
+				suspiciousTweets.add(Twitter.getLatest(username));
+				threatLevel++;
+			}
+			if (Twitter.getLatest(username).contains("tall")) {
+				suspiciousTweets.add(Twitter.getLatest(username));
+				threatLevel++;
+			}
+			if (Twitter.getLatest(username).contains("name")) {
+				suspiciousTweets.add(Twitter.getLatest(username));
+				threatLevel++;
+			}
+
 
 			threat.setUsername(username);
 			threat.setThreatLevel(1);
@@ -42,6 +60,16 @@ public class MyController {
 			threatLevel = 0;
 		}
 
+<<<<<<<
+
+=======
+		threat.setUsername(username);
+		threat.setThreatLevel(threatLevel);
+		for (int i = 0; i < suspiciousTweets.size(); i++) {
+			threat.setMessage("Suspicous Tweet: " + suspiciousTweets.get(i)
+					.substring(suspiciousTweets.get(i).indexOf("text\":"), suspiciousTweets.get(i).indexOf("},{\"")));
+		}
+>>>>>>>
 		if (DatabaseTest.isConnected()) {
 			try {
 				worldAverage = DatabaseTest.getWorldAverage();
