@@ -23,6 +23,7 @@ public class MyController {
 
 		boolean checked = jsonobj.getBoolean("collectdata");
 		int threatLevel = 0;
+		double worldAverage = 0;
 		Threat threat = new Threat();
 
 		boolean exists = Twitter.doesAccountExist(username);
@@ -40,12 +41,13 @@ public class MyController {
 
 		if (DatabaseTest.isConnected()) {
 			try {
-				double worldAverage = DatabaseTest.getWorldAverage();
+				worldAverage = DatabaseTest.getWorldAverage();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			// threat.setWorldAverage(worldAverage);
+			threat.setWorldAverage(worldAverage);
+			System.out.println("world average: " + worldAverage);
 			if (checked) {
 				DatabaseTest.putSomeData("" + threatLevel);
 			}
