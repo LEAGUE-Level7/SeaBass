@@ -16,8 +16,12 @@ public class MyController {
 	@PostMapping("/getScore")
 	Threat myMethod(@RequestBody String str) {
 		System.out.println("post request: " + str);
-		return new Threat("email", "e@gmail.com");
-		// "{threatlevel:" + new Random().nextInt(1000)+ "}";
+		String result = getLatestTweet(str);
+		Threat threat = new Threat();
+		threat.setLatestTweet(result);
+		threat.setUsername(username);
+		threat.setThreatLevel(Random random = new Random().nextInt(100));
+	
 	}
 
 	@GetMapping("/twitterUser")
