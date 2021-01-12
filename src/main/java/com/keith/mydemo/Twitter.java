@@ -91,6 +91,35 @@ public class Twitter {
 		}
 		return "There was a problem getting you bearer token. Please make sure you set the BEARER_TOKEN environment variable";
 	}
+	
+	/**
+	 * Gets hashmap of all the public information you can get about a username
+	 * Information includes: 
+	 * 		{created_at, description, entities, id, location, name, pinned_tweet_id, 
+	 * 		 profile_image_url, protected, public_metrics, url, username, verified, withheld }
+	 */
+	public static HashMap<String, Object> getUserInfo(String username) {
+		String bearerToken = System.getenv("BEARER_TOKEN");
+		String userInfo = "";
+		try {
+			userInfo = getUsers(username, bearerToken);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		HashMap<String, Object> results = new HashMap<>();
+		JSONObject obj = new JSONObject(userInfo);
+		if(!obj.has("data")) {
+			results.put("Error", "Failed to find " + username);
+			return results;
+		}
+		obj = obj.getJSONArray("data").getJSONObject(0);
+		for(String key : obj.keySet()) {
+			results.put(key, obj.get(key));
+		}
+		return results;
+	}
 
 	/*
 	 * This method calls the v2 Users endpoint with usernames as query parameter
@@ -105,7 +134,8 @@ public class Twitter {
 		ArrayList<NameValuePair> queryParameters;
 		queryParameters = new ArrayList<>();
 		queryParameters.add(new BasicNameValuePair("usernames", usernames));
-		queryParameters.add(new BasicNameValuePair("user.fields", "created_at,description,pinned_tweet_id"));
+		queryParameters.add(new BasicNameValuePair("user.fields", "created_at,description,entities,id,location,name," +
+				"pinned_tweet_id,profile_image_url,protected,public_metrics,url,username,verified,withheld"));
 		uriBuilder.addParameters(queryParameters);
 
 		HttpGet httpGet = new HttpGet(uriBuilder.build());
