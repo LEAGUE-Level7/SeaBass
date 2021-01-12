@@ -38,38 +38,49 @@ public class MyController {
 		if (exists) {
 			threatLevel = 1;
 			threat.setMessage("All good");
-			System.out.println(Twitter.getLatest(username));
-			if (Twitter.getLatest(username).contains("birthday")) {
-				suspiciousTweets.add(Twitter.getLatest(username));
-				threatLevel++;
-			}
-			if (Twitter.getLatest(username).contains("tall")) {
-				suspiciousTweets.add(Twitter.getLatest(username));
-				threatLevel++;
-			}
-			if (Twitter.getLatest(username).contains("name")) {
-				suspiciousTweets.add(Twitter.getLatest(username));
-				threatLevel++;
-			}
+			for (String tweet : Twitter.getLatestTweets(username)) {
 
+				System.out.println();
+
+				if (tweet.contains("tall")) {
+					suspiciousTweets.add(tweet);
+					threatLevel++;
+				}
+				if (tweet.contains("name")) {
+					suspiciousTweets.add(tweet);
+					threatLevel++;
+				}
+				if (tweet.contains("birthday")) {
+					suspiciousTweets.add(tweet);
+					threatLevel++;
+				}if (tweet.contains("live")) {
+					suspiciousTweets.add(tweet);
+					threatLevel++;
+				}
+				if (tweet.contains("favorite")) {
+					suspiciousTweets.add(tweet);
+					threatLevel++;
+				}
+				if (tweet.contains("name")) {
+					suspiciousTweets.add(tweet);
+					threatLevel++;
+				}
+			}
 
 			threat.setUsername(username);
-			threat.setThreatLevel(1);
+			threat.setThreatLevel(threatLevel);
 		} else {
 			threat.setMessage("Account does not exist!");
 			threatLevel = 0;
 		}
 
-<<<<<<<
-
-=======
 		threat.setUsername(username);
 		threat.setThreatLevel(threatLevel);
 		for (int i = 0; i < suspiciousTweets.size(); i++) {
 			threat.setMessage("Suspicous Tweet: " + suspiciousTweets.get(i)
 					.substring(suspiciousTweets.get(i).indexOf("text\":"), suspiciousTweets.get(i).indexOf("},{\"")));
 		}
->>>>>>>
+
 		if (DatabaseTest.isConnected()) {
 			try {
 				worldAverage = DatabaseTest.getWorldAverage();

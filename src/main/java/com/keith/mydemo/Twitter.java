@@ -168,7 +168,6 @@ public class Twitter {
 		return "There was a problem getting you bearer token. Please make sure you set the BEARER_TOKEN environment variable";
 	}
 
-	
 	/***
 	 * Returns and array of strings. Each string is a recent tweet from the user.
 	 */
@@ -181,10 +180,18 @@ public class Twitter {
 			String response = getLatestTweetsJSON(user, bearerToken);
 			JSONObject jsonobj = new JSONObject(response);
 			JSONArray jsonarr = jsonobj.getJSONArray("data");
-			for(int i = 0; i < jsonarr.length(); i++) {
+			for (int i = 0; i < jsonarr.length(); i++) {
 				JSONObject arrayelement = jsonarr.getJSONObject(i);
-				System.out.println(arrayelement.getString("id"));
-				System.out.println(arrayelement.getString("text"));
+				System.out.println("id: " + arrayelement.getString("id"));
+				System.out.println("text: " + arrayelement.getString("text"));
+				System.out.println("date: " + getTweets(arrayelement.getString("id"), bearerToken));
+				URIBuilder uriBuilder = new URIBuilder("https://api.twitter.com/2/tweets");
+				ArrayList<NameValuePair> queryParameters;
+				queryParameters = new ArrayList<>();
+				queryParameters.add(new BasicNameValuePair("ids", arrayelement.getString("id")));
+				System.out.println(arrayelement);
+				uriBuilder.addParameters(queryParameters);
+				System.out.println("aaaaaaaaaaaaa: " + uriBuilder.build());
 				list.add(arrayelement.getString("text"));
 			}
 		}
@@ -196,11 +203,11 @@ public class Twitter {
 
 		HttpClient httpClient = HttpClients.custom()
 				.setDefaultRequestConfig(RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD).build()).build();
-
 		URIBuilder uriBuilder = new URIBuilder("https://api.twitter.com/2/tweets");
 		ArrayList<NameValuePair> queryParameters;
 		queryParameters = new ArrayList<>();
 		queryParameters.add(new BasicNameValuePair("ids", ids));
+		queryParameters.add(new BasicNameValuePair("tweet.fields", "created_at"));
 		uriBuilder.addParameters(queryParameters);
 
 		HttpGet httpGet = new HttpGet(uriBuilder.build());
@@ -216,7 +223,8 @@ public class Twitter {
 	}
 
 	/**
-	 * Gets latest tweets from account. Returns unparsed raw and wriggling json string
+	 * Gets latest tweets from account. Returns unparsed raw and wriggling json
+	 * string
 	 */
 	private static String getLatestTweetsJSON(String user, String bearerToken) throws IOException, URISyntaxException {
 		String userResponse = null;
@@ -229,7 +237,7 @@ public class Twitter {
 		queryParameters = new ArrayList<>();
 		queryParameters.add(new BasicNameValuePair("query", "from:" + user));
 		uriBuilder.addParameters(queryParameters);
-
+		System.out.println("eeeeeeeeeeeeeee: " + uriBuilder.build());
 		HttpGet httpGet = new HttpGet(uriBuilder.build());
 		httpGet.setHeader("Authorization", String.format("Bearer %s", bearerToken));
 		httpGet.setHeader("Content-Type", "application/json");
