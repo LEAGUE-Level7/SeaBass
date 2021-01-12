@@ -2,6 +2,7 @@ package com.keith.mydemo;
 
 import java.io.*;
 import java.net.*;
+import java.sql.SQLException;
 import java.util.Random;
 
 import org.json.*;
@@ -22,6 +23,7 @@ public class MyController {
 
 		boolean checked = jsonobj.getBoolean("collectdata");
 		int threatLevel = 0;
+		double worldAverage = 0;
 		Threat threat = new Threat();
 
 		boolean exists = Twitter.doesAccountExist(username);
@@ -41,8 +43,14 @@ public class MyController {
 		}
 
 		if (DatabaseTest.isConnected()) {
-			double worldAverage = DatabaseTest.getWorldAverage();
-			// threat.setWorldAverage(worldAverage);
+			try {
+				worldAverage = DatabaseTest.getWorldAverage();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			threat.setWorldAverage(worldAverage);
+			System.out.println("world average: " + worldAverage);
 			if (checked) {
 				DatabaseTest.putSomeData("" + threatLevel);
 			}
@@ -123,7 +131,13 @@ public class MyController {
 
 	@GetMapping("/databaseTest")
 	String databaseTest() {
-		return DatabaseTest.getAllData();
+		try {
+			return DatabaseTest.getAllData();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@GetMapping("/databaseTest2")
