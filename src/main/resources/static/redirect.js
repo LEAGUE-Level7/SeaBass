@@ -41,7 +41,7 @@ function drawThreatMeter() {
 	deg=start-threatLevel*Math.PI/maxThreatLevel
 	ctx.beginPath();
 	ctx.moveTo(200,190)
-	ctx.lineTo(200+sin(deg)*radius, 190+cos(deg)*radius)
+	ctx.lineTo(200+Math.sin(deg)*radius, 190+Math.cos(deg)*radius)
 	ctx.strokeStyle = "red";
 	ctx.lineWidth = 10
 	ctx.stroke();
