@@ -3,7 +3,7 @@ package com.keith.mydemo;
 import java.io.*;
 import java.net.*;
 import java.sql.SQLException;
-import java.util.Random;
+import java.util.*;
 
 import org.json.*;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +36,10 @@ public class MyController {
 			threat.setMessage("All good");
 
 			threat.setUsername(username);
-			threat.setThreatLevel(3);
+			threat.setThreatLevel(1);
+			
+			HashMap<String, Object> userInfo = Twitter.getUserInfo(username);
+			threat.setProfileImageURL((String) userInfo.get("profile_image_url"));
 		} else {
 			threat.setMessage("Account does not exist!");
 			threatLevel = 0;

@@ -8,6 +8,7 @@ public class Threat {
 	int threatLevel;
 	String message;
 	double worldAvg;
+	String profileImageURL;
 	public String getMessage() {
 		return message;
 	}
@@ -39,6 +40,12 @@ public class Threat {
 		this.worldAvg = worldAvg;
 	}
 	
+	public String getProfileImageURL() {
+		return profileImageURL;
+	}
+	public void setProfileImageURL(String profileURL) {
+		this.profileImageURL = profileURL;
+	}
 	
 	
 	

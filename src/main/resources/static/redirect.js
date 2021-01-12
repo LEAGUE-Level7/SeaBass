@@ -3,8 +3,10 @@ let currentThreatLevel = 0
 let threatLevel = 0;
 function showThreatLevel() {
 	let data = JSON.parse(myStorage.getItem("object"))
-	threatLevel = data.threatLevel
+	console.log(data)
+	const threatLevel = data.threatLevel
 	const latestTweet = data.latestTweet
+	const profileImageURL = data.profileImageURL;
 	let threatLevelValue = document.getElementById("threatLevelTitle");
 	let latestTweetValue = document.getElementById("latestTweet");
 	threatLevelValue.innerHTML = "Your Threat Level is: " + threatLevel;
@@ -14,7 +16,9 @@ function showThreatLevel() {
 		latestTweetValue.innerHTML = "Latest Tweet: " + latestTweet;
 		
 	}
-	drawThreatMeter(threatLevel)
+	let profileImageValue = document.getElementById("profileImage")
+	profileImageValue.src = profileImageURL
+	drawThreatMeter()
 }
 function drawThreatMeter() {
 	let canvas = document.getElementById("canvas");
