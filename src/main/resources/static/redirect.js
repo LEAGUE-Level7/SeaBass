@@ -16,8 +16,11 @@ function showThreatLevel() {
 		latestTweetValue.innerHTML = "Latest Tweet: " + latestTweet;
 		
 	}
-	let profileImageValue = document.getElementById("profileImage")
-	profileImageValue.src = profileImageURL
+	if (profileImageURL != undefined) {
+		let profileImageValue = document.getElementById("profileImage")
+		profileImageValue.src = profileImageURL
+		profileImageValue.style.visibility = "visible";
+	}
 	drawThreatMeter()
 }
 function drawThreatMeter() {
