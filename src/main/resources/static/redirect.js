@@ -21,9 +21,6 @@ function drawThreatMeter() {
 	let ctx = canvas.getContext("2d");
 	ctx.canvas.width = 400;
 	ctx.canvas.height = 200;
-	//ctx.beginPath();
-	//ctx.arc(200, 120, 100, Math.PI, 2 * Math.PI);
-	//ctx.closePath();
 	ctx.arc(200, 190, 150, Math.PI, 2 * Math.PI);
 	//ctx.lineTo(95,50);
 	var grd = ctx.createLinearGradient(60, 0, 400, 0);
