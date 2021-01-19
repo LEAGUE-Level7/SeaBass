@@ -76,3 +76,8 @@ span {
     display: none;
 }
 
+#canvas {
+	margin: auto;
+	display: block
+}
+

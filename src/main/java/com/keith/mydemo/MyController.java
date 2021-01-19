@@ -36,7 +36,7 @@ public class MyController {
 			threat.setMessage("All good");
 
 			threat.setUsername(username);
-			threat.setThreatLevel(1);
+			threat.setThreatLevel(3);
 		} else {
 			threat.setMessage("Account does not exist!");
 			threatLevel = 0;
