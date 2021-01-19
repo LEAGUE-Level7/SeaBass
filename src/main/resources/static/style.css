@@ -23,7 +23,7 @@ h2 {
 
 .content {
     width: 50%;
-    align: center;
+    text-align: center;
     margin-left: auto;
     margin-right: auto;
     border-style: solid;
@@ -31,10 +31,10 @@ h2 {
     justify-content: center;
 }
 
-    .content .contentItem {
+    /* .content .contentItem { */
         /*   border-color: white;
   border: solid 1px; */
-    }
+    /* } */
 
 .select {
     text-align: center;
@@ -75,3 +75,4 @@ span {
 .hidden {
     display: none;
 }
+
