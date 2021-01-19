@@ -39,9 +39,10 @@ public class MyController {
 			threatLevel = 1;
 			threat.setMessage("All good");
 			for (String tweet : Twitter.getLatestTweets(username)) {
-
+				
 				System.out.println();
-
+				System.out.println("eeeeeeeeeeeeeeeeeee: "+ tweet);
+				System.out.println("eeeeeeeeee");
 				if (tweet.contains("tall")) {
 					suspiciousTweets.add(tweet);
 					threatLevel++;
@@ -51,7 +52,8 @@ public class MyController {
 					threatLevel++;
 				}
 				if (tweet.contains("birthday")) {
-					suspiciousTweets.add(tweet);
+					
+					suspiciousTweets.add(tweet + "Birthday might be: ");
 					threatLevel++;
 				}if (tweet.contains("live")) {
 					suspiciousTweets.add(tweet);

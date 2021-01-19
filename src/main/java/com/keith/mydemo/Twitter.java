@@ -189,10 +189,8 @@ public class Twitter {
 				ArrayList<NameValuePair> queryParameters;
 				queryParameters = new ArrayList<>();
 				queryParameters.add(new BasicNameValuePair("ids", arrayelement.getString("id")));
-				System.out.println(arrayelement);
 				uriBuilder.addParameters(queryParameters);
-				System.out.println("aaaaaaaaaaaaa: " + uriBuilder.build());
-				list.add(arrayelement.getString("text"));
+				list.add(arrayelement.getString("text") + getTweets(arrayelement.getString("id"), bearerToken));
 			}
 		}
 		return list;
