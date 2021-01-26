@@ -1,12 +1,19 @@
 package com.keith.mydemo;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.io.*;
 import java.net.*;
 import java.sql.SQLException;
-import java.util.Random;
+import java.util.*;
 
-import org.json.*;
-import org.springframework.web.bind.annotation.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MyController {
@@ -27,21 +34,48 @@ public class MyController {
 		Threat threat = new Threat();
 
 		boolean exists = Twitter.doesAccountExist(username);
-
+		ArrayList<String> suspiciousTweets = new ArrayList<String>();
 		if (exists) {
-			
-
-			String result = getLatestTweet(username);
-			threat.setLatestTweet(result);
+			threatLevel = 1;
 			threat.setMessage("All good");
+			for (String tweet : Twitter.getLatestTweets(username)) {
 
-			threat.setUsername(username);
-			threat.setThreatLevel(3);
+				System.out.println();
+				System.out.println("eeeeeeeeeeeeeeeeeee: " + tweet);
+				String date = tweet.substring(tweet.indexOf("{\"created_at\":\"") + "{\"created_at\":\"".length(),
+						tweet.indexOf(".000Z\",\"id\""));
+				String message = tweet.substring(tweet.indexOf("\"text\":") + "\"text\":".length(),
+						tweet.indexOf("}]}"));
+				if (tweet.toLowerCase().contains("tall")) {
+					suspiciousTweets.add(message + " - Your height was found");
+					threatLevel++;
+				}
+				if (tweet.toLowerCase().contains("name")) {
+					suspiciousTweets.add(message + " - Your name was found");
+					threatLevel++;
+				}
+				if (tweet.toLowerCase().contains("birthday")) {
+
+					suspiciousTweets.add(message + " - Birthday might be: " + date);
+					threatLevel++;
+				}
+				if (tweet.toLowerCase().contains("live")) {
+					suspiciousTweets.add(message + " - Your location was found");
+					threatLevel++;
+				}
+			}
 		} else {
 			threat.setMessage("Account does not exist!");
 			threatLevel = 0;
 		}
+		threat.setUsername(username);
+		threat.setThreatLevel(threatLevel);
 
+		if (suspiciousTweets.size() > 0) {
+			for (int i = 0; i < suspiciousTweets.size(); i++) {
+				threat.setMessage("Suspicous Tweet: " + suspiciousTweets.get(i));
+			}
+		}
 		if (DatabaseTest.isConnected()) {
 			try {
 				worldAverage = DatabaseTest.getWorldAverage();
@@ -99,9 +133,8 @@ public class MyController {
 		}
 		try {
 			// This parses the json of the tweet results
-			JSONObject jsonobj = new JSONObject(Twitter.getLatest(user));
-			String tweetlist = jsonobj.getJSONArray("data").getJSONObject(0).getString("text");
-			return tweetlist;
+			ArrayList<String> tweets = Twitter.getLatestTweets(user);
+			return tweets.get(0);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
