@@ -29,23 +29,23 @@ public class Twitter {
 
 	// To set your enviornment variables in your terminal run the following line:
 	// export 'BEARER_TOKEN'='<your_bearer_token>'
-	
-	public static void showFilteredStream() throws IOException, URISyntaxException{
-		 String bearerToken = System.getenv("BEARER_TOKEN");
-		    if (null != bearerToken) {
-		      Map<String, String> rules = new HashMap<>();
-		      rules.put("Keithslife has:images", "keith images");
-		      rules.put("Keithslife has:media", "keith media");
-		      rules.put("Keithslife has:mentions", "keith mention");
-		      setupRules(bearerToken, rules);
-		      connectStream(bearerToken);
-		    } else {
-		      System.out.println("There was a problem getting you bearer token. Please make sure you set the BEARER_TOKEN environment variable");
-		    }
-		    
-		    
+
+	public static void showFilteredStream() throws IOException, URISyntaxException {
+		String bearerToken = System.getenv("BEARER_TOKEN");
+		if (null != bearerToken) {
+			Map<String, String> rules = new HashMap<>();
+			rules.put("Keithslife has:images", "keith images");
+			rules.put("Keithslife has:media", "keith media");
+			rules.put("Keithslife has:mentions", "keith mention");
+			setupRules(bearerToken, rules);
+			connectStream(bearerToken);
+		} else {
+			System.out.println(
+					"There was a problem getting you bearer token. Please make sure you set the BEARER_TOKEN environment variable");
+		}
+
 	}
-	
+
 	public static boolean doesAccountExist(String username) throws IOException, URISyntaxException {
 		String bearerToken = System.getenv("BEARER_TOKEN");
 		System.out.println(bearerToken);
@@ -53,17 +53,16 @@ public class Twitter {
 			// Replace comma separated usernames with usernames of your choice
 			String response = getUsers(username, bearerToken);
 			System.out.println(response);
-			
+
 			JSONObject jsonobj = new JSONObject(response);
-			if(jsonobj.has("errors")) {
+			if (jsonobj.has("errors")) {
 				System.out.println("There is an 'errors' field");
 				return false;
-			}
-			else if(jsonobj.has("data")) {
+			} else if (jsonobj.has("data")) {
 				System.out.println("There is a 'data' field");
 				return true;
 			}
-			
+
 		}
 		return false;
 	}
@@ -199,16 +198,32 @@ public class Twitter {
 		return "There was a problem getting you bearer token. Please make sure you set the BEARER_TOKEN environment variable";
 	}
 
-	public static String getLatest(String user) throws IOException, URISyntaxException {
+	/***
+	 * Returns and array of strings. Each string is a recent tweet from the user.
+	 */
+	public static ArrayList<String> getLatestTweets(String user) throws IOException, URISyntaxException {
 		String bearerToken = System.getenv("BEARER_TOKEN");
 		System.out.println(bearerToken);
+		ArrayList<String> list = new ArrayList<>();
 		if (null != bearerToken) {
 			// Replace comma separated usernames with usernames of your choice
-			String response = getLatestTweet(user, bearerToken);
-			System.out.println(response);
-			return response;
+			String response = getLatestTweetsJSON(user, bearerToken);
+			JSONObject jsonobj = new JSONObject(response);
+			JSONArray jsonarr = jsonobj.getJSONArray("data");
+			for (int i = 0; i < jsonarr.length(); i++) {
+				JSONObject arrayelement = jsonarr.getJSONObject(i);
+				System.out.println("id: " + arrayelement.getString("id"));
+				System.out.println("text: " + arrayelement.getString("text"));
+				System.out.println("date: " + getTweets(arrayelement.getString("id"), bearerToken));
+				URIBuilder uriBuilder = new URIBuilder("https://api.twitter.com/2/tweets");
+				ArrayList<NameValuePair> queryParameters;
+				queryParameters = new ArrayList<>();
+				queryParameters.add(new BasicNameValuePair("ids", arrayelement.getString("id")));
+				uriBuilder.addParameters(queryParameters);
+				list.add(arrayelement.getString("text") + getTweets(arrayelement.getString("id"), bearerToken));
+			}
 		}
-		return "There was a problem getting you bearer token. Please make sure you set the BEARER_TOKEN environment variable";
+		return list;
 	}
 
 	private static String getTweets(String ids, String bearerToken) throws IOException, URISyntaxException {
@@ -216,11 +231,11 @@ public class Twitter {
 
 		HttpClient httpClient = HttpClients.custom()
 				.setDefaultRequestConfig(RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD).build()).build();
-
 		URIBuilder uriBuilder = new URIBuilder("https://api.twitter.com/2/tweets");
 		ArrayList<NameValuePair> queryParameters;
 		queryParameters = new ArrayList<>();
 		queryParameters.add(new BasicNameValuePair("ids", ids));
+		queryParameters.add(new BasicNameValuePair("tweet.fields", "created_at"));
 		uriBuilder.addParameters(queryParameters);
 
 		HttpGet httpGet = new HttpGet(uriBuilder.build());
@@ -235,7 +250,11 @@ public class Twitter {
 		return userResponse;
 	}
 
-	private static String getLatestTweet(String user, String bearerToken) throws IOException, URISyntaxException {
+	/**
+	 * Gets latest tweets from account. Returns unparsed raw and wriggling json
+	 * string
+	 */
+	private static String getLatestTweetsJSON(String user, String bearerToken) throws IOException, URISyntaxException {
 		String userResponse = null;
 
 		HttpClient httpClient = HttpClients.custom()
@@ -246,7 +265,7 @@ public class Twitter {
 		queryParameters = new ArrayList<>();
 		queryParameters.add(new BasicNameValuePair("query", "from:" + user));
 		uriBuilder.addParameters(queryParameters);
-
+		System.out.println("eeeeeeeeeeeeeee: " + uriBuilder.build());
 		HttpGet httpGet = new HttpGet(uriBuilder.build());
 		httpGet.setHeader("Authorization", String.format("Bearer %s", bearerToken));
 		httpGet.setHeader("Content-Type", "application/json");
@@ -259,13 +278,6 @@ public class Twitter {
 		return userResponse;
 	}
 
-	
-	
-	
-	
-	
-	
-	
 	/*
 	 * This method calls the filtered stream endpoint and streams Tweets from it
 	 */
@@ -404,7 +416,5 @@ public class Twitter {
 			return String.format(string, result.substring(0, result.length() - 1));
 		}
 	}
-
-	
 
 }

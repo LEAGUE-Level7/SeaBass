@@ -31,7 +31,6 @@ public class DatabaseTest {
 	}
 
 	public static double getWorldAverage() throws SQLException {
-		// TODO query for world average and return it as a double.
 		// The getAllData() function below already does something similar
 		Statement statement;
 		statement = connection.createStatement();
