@@ -99,7 +99,7 @@ public class MyController {
 		}
 		try {
 			// This parses the json of the tweet results
-			JSONObject jsonobj = new JSONObject(Twitter.getLatest(user));
+			JSONObject jsonobj = new JSONObject(Twitter.getLatestTweets(user));
 			String tweetlist = jsonobj.getJSONArray("data").getJSONObject(0).getString("text");
 			return tweetlist;
 		} catch (IOException e) {
