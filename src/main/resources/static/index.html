@@ -1,80 +1,86 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Entry Page</title>
+<title>Entry Page</title>
 
-    <!-- import the webpage's stylesheet -->
-    <link rel="stylesheet" href="/style.css" />
+<!-- import the webpage's stylesheet -->
+<link rel="stylesheet" href="/style.css" />
 
-    <!-- import the webpage's javascript file -->
-    <script src="/script.js" defer></script>
+<!-- import the webpage's javascript file -->
+<script src="/script.js" defer></script>
 </head>
 <body>
-    <div class="content">
-        <h1 class="contentItem">Can I be Doxed?</h1>
-        <br />
-        <h2 class="contentItem">
-            Enter Your Username And Select A Social Media Platform To Determine The Security Of Your Account
-        </h2>
-        <br />
+	<div class="content">
+		<h1 class="contentItem">Can I be Doxed?</h1>
+		<br />
+		<h2 class="contentItem">Enter Your Username And Select A Social
+			Media Platform To Determine The Security Of Your Account</h2>
+		<br />
 
-        <div class="select">
+		<div class="select">
 
-            <form id="sampleform" href="/redirect.html">
-                <select class="buttonstyle">
-                    <option value="default">Select a platform...</option>
-                    <option value="fb">Facebook</option>
-                    <option value="tw">Twitter</option>
-                    <option value="ig">Instagram</option>
-                </select>
+			<form id="sampleform" href="/redirect.html">
+				<select class="buttonstyle">
+					<option value="default">Select a platform...</option>
+					<option value="fb">Facebook</option>
+					<option value="tw">Twitter</option>
+					<option value="ig">Instagram</option>
+				</select>
 
-                <div class="input">
-                    <label class="labelstyle" for="target">Account Username: </label>
-                    <input type="text" id="target" name="target" />
-                </div>
+				<div class="input">
+					<label class="labelstyle" for="target">Account Username: </label> <input
+						type="text" id="target" name="target" />
+				</div>
 
-                <select class="buttonstyle" onchange="addSearchObject(this.value);">
-                    <option value="default">Select some info for us to search for...</option>
-                    <option value="all">All</option>
-                    <option value="name_div">Name</option>
-                    <option value="birth_div">Birthday</option>
-                    <option value="age_div">Age</option>
-                </select>
-                <div class="input hidden" id="name_div">
-                    <label class="labelstyle" for="name">Name:</label>
-                    <input type="text" id="name" name="name" />
-                </div>
-                <div class="input hidden " id="age_div">
-                    <label class="labelstyle" for="age">Age:</label>
-                    <input type="text" id="age" name="age" />
-                </div>
-                <div class="input hidden" id="birth_div">
-                    <label class="labelstyle" for="birthday">Birthday:</label>
-                    <input type="text" id="birthday" name="birthday" />
-                </div>
+				<select class="buttonstyle" onchange="addSearchObject(this.value);">
+					<option value="default">Select some info for us to search
+						for...</option>
+					<option value="all">All</option>
+					<option value="name_div">Name</option>
+					<option value="birth_div">Birthday</option>
+					<option value="age_div">Age</option>
+				</select>
+				<div class="input hidden" id="name_div">
+					<label class="labelstyle" for="name">Name:</label> <input
+						type="text" id="name" name="name" />
+				</div>
+				<div class="input hidden " id="age_div">
+					<label class="labelstyle" for="age">Age:</label> <input type="text"
+						id="age" name="age" />
+				</div>
+				<div class="input hidden" id="birth_div">
+					<label class="labelstyle" for="birthday">Birthday:</label> <input
+						type="text" id="birthday" name="birthday" />
+				</div>
 
-                <br />
+				<br />
 
-                <div class="check_box">
-                    <label>
-                        <input type="checkbox" name="Agreement" id="collectDataCheckbox"/>
-                        <span>
-                            By Checking you allow your risk level to be added to the global average for the public to see.
-                        </span>
-                    </label>
-                </div>
-                <br />
-                <input type="submit" id="submit" value="Click Here to Check Your Risk Level">
-            </form>
+				<div class="check_box">
+					<label> <input type="checkbox" name="Agreement"
+						id="collectDataCheckbox" /> <span> By Checking you allow
+							your risk level to be added to the global average for the public
+							to see. </span>
+					</label>
+				</div>
+				<br /> <input type="submit" id="submit"
+					value="Click Here to Check Your Risk Level" class="buttonstyle">
+				<br />
+			</form>
 
-        </div>
-    </div>
+		</div>
+		<div class="how-it-works" style="text-align: right; padding: 1em">
 
-    <script src="https://button.glitch.me/button.js" defer></script>
+			<a href="how-it-works.html" class="buttonstyle"
+				style="border-radius: 10px; font-family: sans-serif; font-size: 14px; text-decoration: none; margin-right: 0.1em">
+				How does this site work? </a>
+
+		</div>
+	</div>
+	<script src="https://button.glitch.me/button.js" defer></script>
 </body>
 </html>
 

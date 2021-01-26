@@ -39,11 +39,13 @@ public class MyController {
 			threatLevel = 1;
 			threat.setMessage("All good");
 			for (String tweet : Twitter.getLatestTweets(username)) {
-				
+
 				System.out.println();
-				System.out.println("eeeeeeeeeeeeeeeeeee: "+ tweet);
-				String date = tweet.substring(tweet.indexOf("{\"created_at\":\"") + "{\"created_at\":\"".length(), tweet.indexOf(".000Z\",\"id\""));
-				String message = tweet.substring(tweet.indexOf("\"text\":")+ "\"text\":".length(), tweet.indexOf("}]}"));
+				System.out.println("eeeeeeeeeeeeeeeeeee: " + tweet);
+				String date = tweet.substring(tweet.indexOf("{\"created_at\":\"") + "{\"created_at\":\"".length(),
+						tweet.indexOf(".000Z\",\"id\""));
+				String message = tweet.substring(tweet.indexOf("\"text\":") + "\"text\":".length(),
+						tweet.indexOf("}]}"));
 				if (tweet.toLowerCase().contains("tall")) {
 					suspiciousTweets.add(message + " - Your height was found");
 					threatLevel++;
@@ -53,30 +55,26 @@ public class MyController {
 					threatLevel++;
 				}
 				if (tweet.toLowerCase().contains("birthday")) {
-					
+
 					suspiciousTweets.add(message + " - Birthday might be: " + date);
 					threatLevel++;
-				}if (tweet.toLowerCase().contains("live")) {
+				}
+				if (tweet.toLowerCase().contains("live")) {
 					suspiciousTweets.add(message + " - Your location was found");
 					threatLevel++;
 				}
-				
 			}
-
-			threat.setUsername(username);
-			threat.setThreatLevel(threatLevel);
-			
 		} else {
 			threat.setMessage("Account does not exist!");
 			threatLevel = 0;
 		}
-
 		threat.setUsername(username);
 		threat.setThreatLevel(threatLevel);
-		if(suspiciousTweets.size() > 0) {
-		for (int i = 0; i < suspiciousTweets.size(); i++) {
-			threat.setMessage("Suspicous Tweet: " + suspiciousTweets.get(i));
-		}
+
+		if (suspiciousTweets.size() > 0) {
+			for (int i = 0; i < suspiciousTweets.size(); i++) {
+				threat.setMessage("Suspicous Tweet: " + suspiciousTweets.get(i));
+			}
 		}
 		if (DatabaseTest.isConnected()) {
 			try {
