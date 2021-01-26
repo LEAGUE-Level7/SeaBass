@@ -38,10 +38,9 @@ public class MyController {
 		if (exists) {
 			threatLevel = 1;
 			threat.setMessage("All good");
+			String result = getLatestTweet(username);
+			threat.setLatestTweet(result);
 			for (String tweet : Twitter.getLatestTweets(username)) {
-
-				System.out.println();
-				System.out.println("eeeeeeeeeeeeeeeeeee: " + tweet);
 				String date = tweet.substring(tweet.indexOf("{\"created_at\":\"") + "{\"created_at\":\"".length(),
 						tweet.indexOf(".000Z\",\"id\""));
 				String message = tweet.substring(tweet.indexOf("\"text\":") + "\"text\":".length(),
