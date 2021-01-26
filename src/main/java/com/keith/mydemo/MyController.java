@@ -42,35 +42,30 @@ public class MyController {
 				
 				System.out.println();
 				System.out.println("eeeeeeeeeeeeeeeeeee: "+ tweet);
-				System.out.println("eeeeeeeeee");
-				if (tweet.contains("tall")) {
-					suspiciousTweets.add(tweet);
+				String date = tweet.substring(tweet.indexOf("{\"created_at\":\"") + "{\"created_at\":\"".length(), tweet.indexOf(".000Z\",\"id\""));
+				String message = tweet.substring(tweet.indexOf("\"text\":")+ "\"text\":".length(), tweet.indexOf("}]}"));
+				if (tweet.toLowerCase().contains("tall")) {
+					suspiciousTweets.add(message + " - Your height was found");
 					threatLevel++;
 				}
-				if (tweet.contains("name")) {
-					suspiciousTweets.add(tweet);
+				if (tweet.toLowerCase().contains("name")) {
+					suspiciousTweets.add(message + " - Your name was found");
 					threatLevel++;
 				}
-				if (tweet.contains("birthday")) {
+				if (tweet.toLowerCase().contains("birthday")) {
 					
-					suspiciousTweets.add(tweet + "Birthday might be: ");
+					suspiciousTweets.add(message + " - Birthday might be: " + date);
 					threatLevel++;
-				}if (tweet.contains("live")) {
-					suspiciousTweets.add(tweet);
-					threatLevel++;
-				}
-				if (tweet.contains("favorite")) {
-					suspiciousTweets.add(tweet);
+				}if (tweet.toLowerCase().contains("live")) {
+					suspiciousTweets.add(message + " - Your location was found");
 					threatLevel++;
 				}
-				if (tweet.contains("name")) {
-					suspiciousTweets.add(tweet);
-					threatLevel++;
-				}
+				
 			}
 
 			threat.setUsername(username);
 			threat.setThreatLevel(threatLevel);
+			
 		} else {
 			threat.setMessage("Account does not exist!");
 			threatLevel = 0;
@@ -78,11 +73,11 @@ public class MyController {
 
 		threat.setUsername(username);
 		threat.setThreatLevel(threatLevel);
+		if(suspiciousTweets.size() > 0) {
 		for (int i = 0; i < suspiciousTweets.size(); i++) {
-			threat.setMessage("Suspicous Tweet: " + suspiciousTweets.get(i)
-					.substring(suspiciousTweets.get(i).indexOf("text\":"), suspiciousTweets.get(i).indexOf("},{\"")));
+			threat.setMessage("Suspicous Tweet: " + suspiciousTweets.get(i));
 		}
-
+		}
 		if (DatabaseTest.isConnected()) {
 			try {
 				worldAverage = DatabaseTest.getWorldAverage();
