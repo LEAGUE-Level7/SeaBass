@@ -17,7 +17,7 @@ public class MyController {
 
 	@PostMapping("/getScore")
 	Threat myMethod(@RequestBody String body) throws IOException, URISyntaxException {
-		System.out.println("post request: " + body);
+		//System.out.println("post request: " + body);
 		JSONObject jsonobj = new JSONObject(body);
 		String username = jsonobj.getString("username");
 
@@ -61,7 +61,7 @@ public class MyController {
 	@GetMapping("/twitterUser")
 	String twitterUser(String username) {
 		if (username == null) {
-			username = "12345szxcvu653hfdsy5643gfda";
+			username = "mostsecureacco1";
 		}
 		try {
 			return Twitter.showUser(username);

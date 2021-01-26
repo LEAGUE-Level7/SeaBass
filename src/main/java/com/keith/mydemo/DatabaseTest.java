@@ -1,6 +1,10 @@
 package com.keith.mydemo;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class DatabaseTest {
@@ -10,8 +14,8 @@ public class DatabaseTest {
 		try {
 			Class.forName("org.postgresql.Driver");
 			String pgpassword = System.getenv("PG_PASSWORD");
-			connection = DriverManager.getConnection("jdbc:postgresql://seabassdb4.westus.cloudapp.azure.com/seabassdox", "postgres",
-					pgpassword);
+			connection = DriverManager.getConnection(
+					"jdbc:postgresql://seabassdb4.westus.cloudapp.azure.com/seabassdox", "postgres", pgpassword);
 
 			System.out.println("Connected to database!");
 		} catch (Exception e) {
@@ -36,13 +40,22 @@ public class DatabaseTest {
 		double avg = 0.0;
 		double numbers = 0.0;
 		int total = 0;
+		ArrayList<Integer> idList = new ArrayList<Integer>();
 
 		while (rs.next()) {
 			int id = rs.getInt("id");
 			int threat = rs.getInt("threat");
 			// result += "{" + id + ":" + threat + "} ";
-			total += threat;
-			numbers++;
+			idList.add(id);
+
+			if (idList.contains(id)) {
+				total+=0;
+				numbers+=0;
+			} else {
+				total += threat;
+				numbers++;
+			}
+
 		}
 		if (numbers != 0) {
 			avg += total / numbers;
