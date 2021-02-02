@@ -24,7 +24,7 @@ public class MyController {
 
 	@PostMapping("/getScore")
 	Threat myMethod(@RequestBody String body) throws IOException, URISyntaxException {
-		// System.out.println("post request: " + body);
+		System.out.println("post request: " + body);
 		JSONObject jsonobj = new JSONObject(body);
 		String username = jsonobj.getString("username");
 
@@ -85,7 +85,7 @@ public class MyController {
 			threat.setWorldAverage(worldAverage);
 			System.out.println("world average: " + worldAverage);
 			if (checked) {
-				DatabaseTest.putSomeData("" + threatLevel);
+				DatabaseTest.putSomeData("" + threatLevel , username);
 			}
 		}
 		return threat;
@@ -94,7 +94,7 @@ public class MyController {
 	@GetMapping("/twitterUser")
 	String twitterUser(String username) {
 		if (username == null) {
-			username = "mostsecureacco1";
+			username = "12345szxcvu653hfdsy5643gfda";
 		}
 		try {
 			return Twitter.showUser(username);
@@ -134,7 +134,6 @@ public class MyController {
 			// This parses the json of the tweet results
 			ArrayList<String> tweets = Twitter.getLatestTweets(user);
 			return tweets.get(0);
-
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -178,7 +177,7 @@ public class MyController {
 		if (number == null) {
 			return DatabaseTest.putData();
 		}
-		return DatabaseTest.putSomeData(number);
+		return DatabaseTest.putSomeData(number, "hi");
 	}
 
 	@GetMapping("/filterStreams")
