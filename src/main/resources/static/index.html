@@ -17,16 +17,23 @@
 	<div class="content">
 		<h1 class="contentItem">Can I be Doxed?</h1>
 		<br />
-		<h2 class="contentItem">Enter Your Username to determine the
-			security of your Twitter account</h2>
+		<h2 class="contentItem">Enter Your Username And Select A Social
+			Media Platform To Determine The Security Of Your Account</h2>
 		<br />
 
 		<div class="select">
 
 			<form id="sampleform" href="/redirect.html">
+				<select class="buttonstyle">
+					<option value="default">Select a platform...</option>
+					<option value="fb">Facebook</option>
+					<option value="tw">Twitter</option>
+					<option value="ig">Instagram</option>
+				</select>
+
 				<div class="input">
-					<label class="labelstyle" for="target"> Twitter Account
-						Username: </label> <input type="text" id="target" name="target" />
+					<label class="labelstyle" for="target">Account Username: </label> <input
+						type="text" id="target" name="target" />
 				</div>
 
 				<select class="buttonstyle" onchange="addSearchObject(this.value);">

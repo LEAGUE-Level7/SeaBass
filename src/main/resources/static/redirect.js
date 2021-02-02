@@ -14,7 +14,7 @@ function showThreatLevel() {
 		latestTweetValue.innerHTML = "Latest Tweet: " + latestTweet;
 		
 	}
-	drawThreatMeter()
+	drawThreatMeter(threatLevel)
 }
 function drawThreatMeter() {
 	let canvas = document.getElementById("canvas");
