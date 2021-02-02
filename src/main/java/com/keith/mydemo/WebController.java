@@ -10,8 +10,9 @@ public class WebController {
 	String myMethod() {
 		return "index.html";
 	}
-	@GetMapping("/redirect")
-	String redirectMethod() {
-		return "redirect.html";
+	@GetMapping("/results")
+	String resultsMethod() {
+		return "results.html";
 	}
+	
 }
