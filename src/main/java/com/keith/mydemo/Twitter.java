@@ -90,12 +90,12 @@ public class Twitter {
 		}
 		return "There was a problem getting you bearer token. Please make sure you set the BEARER_TOKEN environment variable";
 	}
-	
+
 	/**
 	 * Gets hashmap of all the public information you can get about a username
-	 * Information includes: 
-	 * 		{created_at, description, entities, id, location, name, pinned_tweet_id, 
-	 * 		 profile_image_url, protected, public_metrics, url, username, verified, withheld }
+	 * Information includes: {created_at, description, entities, id, location, name,
+	 * pinned_tweet_id, profile_image_url, protected, public_metrics, url, username,
+	 * verified, withheld }
 	 */
 	public static HashMap<String, Object> getUserInfo(String username) {
 		String bearerToken = System.getenv("BEARER_TOKEN");
@@ -109,12 +109,12 @@ public class Twitter {
 		}
 		HashMap<String, Object> results = new HashMap<>();
 		JSONObject obj = new JSONObject(userInfo);
-		if(!obj.has("data")) {
+		if (!obj.has("data")) {
 			results.put("Error", "Failed to find " + username);
 			return results;
 		}
 		obj = obj.getJSONArray("data").getJSONObject(0);
-		for(String key : obj.keySet()) {
+		for (String key : obj.keySet()) {
 			results.put(key, obj.get(key));
 		}
 		return results;
@@ -133,8 +133,8 @@ public class Twitter {
 		ArrayList<NameValuePair> queryParameters;
 		queryParameters = new ArrayList<>();
 		queryParameters.add(new BasicNameValuePair("usernames", usernames));
-		queryParameters.add(new BasicNameValuePair("user.fields", "created_at,description,entities,id,location,name," +
-				"pinned_tweet_id,profile_image_url,protected,public_metrics,url,username,verified,withheld"));
+		queryParameters.add(new BasicNameValuePair("user.fields", "created_at,description,entities,id,location,name,"
+				+ "pinned_tweet_id,profile_image_url,protected,public_metrics,url,username,verified,withheld"));
 		uriBuilder.addParameters(queryParameters);
 
 		HttpGet httpGet = new HttpGet(uriBuilder.build());
@@ -203,25 +203,32 @@ public class Twitter {
 	 */
 	public static ArrayList<String> getLatestTweets(String user) throws IOException, URISyntaxException {
 		String bearerToken = System.getenv("BEARER_TOKEN");
-		System.out.println(bearerToken);
 		ArrayList<String> list = new ArrayList<>();
 		if (null != bearerToken) {
 			// Replace comma separated usernames with usernames of your choice
 			String response = getLatestTweetsJSON(user, bearerToken);
 			JSONObject jsonobj = new JSONObject(response);
-			JSONArray jsonarr = jsonobj.getJSONArray("data");
-			for (int i = 0; i < jsonarr.length(); i++) {
-				JSONObject arrayelement = jsonarr.getJSONObject(i);
-				System.out.println("id: " + arrayelement.getString("id"));
-				System.out.println("text: " + arrayelement.getString("text"));
-				System.out.println("date: " + getTweets(arrayelement.getString("id"), bearerToken));
-				URIBuilder uriBuilder = new URIBuilder("https://api.twitter.com/2/tweets");
-				ArrayList<NameValuePair> queryParameters;
-				queryParameters = new ArrayList<>();
-				queryParameters.add(new BasicNameValuePair("ids", arrayelement.getString("id")));
-				uriBuilder.addParameters(queryParameters);
-				list.add(arrayelement.getString("text") + getTweets(arrayelement.getString("id"), bearerToken));
+			JSONArray jsonarr = null;
+			if (jsonobj.has("data")) {
+				jsonarr = jsonobj.getJSONArray("data");
+				for (int i = 0; i < jsonarr.length(); i++) {
+					JSONObject arrayelement = jsonarr.getJSONObject(i);
+					//System.out.println("id: " + arrayelement.getString("id"));
+					//System.out.println("text: " + arrayelement.getString("text"));
+					//System.out.println("date: " + getTweets(arrayelement.getString("id"), bearerToken));
+					URIBuilder uriBuilder = new URIBuilder("https://api.twitter.com/2/tweets");
+					ArrayList<NameValuePair> queryParameters;
+					queryParameters = new ArrayList<>();
+					queryParameters.add(new BasicNameValuePair("ids", arrayelement.getString("id")));
+					uriBuilder.addParameters(queryParameters);
+					list.add(arrayelement.getString("text") + getTweets(arrayelement.getString("id"), bearerToken));
+				}
+			}else {
+				ArrayList<String> oof = new ArrayList<String>();
+				oof.add("error");
+				return oof;
 			}
+			
 		}
 		return list;
 	}
