@@ -200,10 +200,9 @@ public class Twitter {
 	/***
 	 * Returns and array of strings. Each string is a recent tweet from the user.
 	 */
-	public static ArrayList<String> getLatestTweets(String user) throws IOException, URISyntaxException {
-		 
-
-		ArrayList<String> list = new ArrayList<>();
+	public static ArrayList<Tweet> getLatestTweets(String user) throws IOException, URISyntaxException {
+		String bearerToken = System.getenv("BEARER_TOKEN");
+		ArrayList<Tweet> list = new ArrayList<>();
 		if (null != bearerToken) {
 			// Replace comma separated usernames with usernames of your choice
 			String response = getLatestTweetsJSON(user, bearerToken);
@@ -211,24 +210,28 @@ public class Twitter {
 			JSONArray jsonarr = null;
 			if (jsonobj.has("data")) {
 				jsonarr = jsonobj.getJSONArray("data");
-				for (int i = 0; i < jsonarr.length(); i++) {
+				for (int i = 0; i < jsonarr.length() && i < 10; i++) {
 					JSONObject arrayelement = jsonarr.getJSONObject(i);
-					//System.out.println("id: " + arrayelement.getString("id"));
-					//System.out.println("text: " + arrayelement.getString("text"));
-					//System.out.println("date: " + getTweets(arrayelement.getString("id"), bearerToken));
-					URIBuilder uriBuilder = new URIBuilder("https://api.twitter.com/2/tweets");
-					ArrayList<NameValuePair> queryParameters;
-					queryParameters = new ArrayList<>();
-					queryParameters.add(new BasicNameValuePair("ids", arrayelement.getString("id")));
-					uriBuilder.addParameters(queryParameters);
-					list.add(arrayelement.getString("text") + getTweets(arrayelement.getString("id"), bearerToken));
+					
+					String id = arrayelement.getString("id");
+					
+					String details = getTweets(id, bearerToken);
+					if(details == null) {
+						// this means rate limit exceeded
+						continue;
+					}
+					
+					JSONObject detailedObject = new JSONObject(details);
+					JSONArray dataArray = detailedObject.getJSONArray("data");
+					if(dataArray.length() > 0 ) {
+						JSONObject thetweetobject = dataArray.getJSONObject(0);
+						String text = thetweetobject.getString("text");
+						String date = thetweetobject.getString("created_at");
+						Tweet tweet = new Tweet(text, id, date);
+						list.add(tweet);
+					}
 				}
-			}else {
-				ArrayList<String> oof = new ArrayList<String>();
-				oof.add("error");
-				return oof;
 			}
-			
 		}
 		return list;
 	}
@@ -253,6 +256,9 @@ public class Twitter {
 		HttpEntity entity = response.getEntity();
 		if (null != entity) {
 			userResponse = EntityUtils.toString(entity, "UTF-8");
+		}
+		if(userResponse.contains("Rate limit exceeded")) {
+			return null;
 		}
 		return userResponse;
 	}
@@ -304,7 +310,6 @@ public class Twitter {
 			BufferedReader reader = new BufferedReader(new InputStreamReader((entity.getContent())));
 			String line = reader.readLine();
 			while (line != null) {
-				System.out.println(line);
 				line = reader.readLine();
 			}
 		}

@@ -10,9 +10,10 @@ public class WebsiteController {
 	String myMethod() {
 		return "index.html";
 	}
+
 	@GetMapping("/results")
 	String resultsMethod() {
 		return "results.html";
 	}
-	
+
 }

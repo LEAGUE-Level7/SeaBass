@@ -7,6 +7,5 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class DoxingApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DoxingApplication.class, args);
-		
 	}
 }
