@@ -34,32 +34,28 @@ public class DatabaseTest {
 		// The getAllData() function below already does something similar
 		Statement statement;
 		statement = connection.createStatement();
-		ResultSet rs = statement.executeQuery("SELECT * FROM threatdata");
+		ResultSet rs = statement.executeQuery("SELECT * FROM threatdata2");
 
 		double avg = 0.0;
 		double numbers = 0.0;
 		int total = 0;
-		ArrayList<Integer> idList = new ArrayList<Integer>();
+		String result = "";
 
 		while (rs.next()) {
 			int id = rs.getInt("id");
 			int threat = rs.getInt("threat");
-			// result += "{" + id + ":" + threat + "} ";
-			idList.add(id);
-
-			if (idList.contains(id)) {
-				total+=0;
-				numbers+=0;
-			} else {
-				total += threat;
-				numbers++;
-			}
+			String handle = rs.getString("handle");
+			result += "{" + id + ":" + threat + ":" + handle + "}";
+			
+			
+			total += threat;
+			numbers++;
 
 		}
 		if (numbers != 0) {
 			avg += total / numbers;
 		}
-
+		System.out.println(result);
 		return avg;
 	}
 
@@ -85,8 +81,8 @@ public class DatabaseTest {
 		int numThreats = 1;
 		try {
 			statement = connection.createStatement();
-			statement.execute("INSERT INTO threatdata(threat) VALUES (35)");
-			ResultSet rs = statement.executeQuery("SELECT * FROM threatdata");
+			statement.execute("INSERT INTO threatdata2(threat, handle) VALUES (35, 'asdf')");
+			ResultSet rs = statement.executeQuery("SELECT * FROM threatdata2");
 			while (rs.next()) {
 
 				int id = rs.getInt("id");
@@ -104,14 +100,14 @@ public class DatabaseTest {
 		return result;
 	}
 
-	public static String putSomeData(String number) {
+	public static String putSomeData(String number, String handle) {
 		if (connection == null) {
 			return "database error";
 		}
 		Statement statement;
 		try {
 			statement = connection.createStatement();
-			boolean rs = statement.execute("INSERT INTO public.threatdata(threat) VALUES(" + number + ");");
+			boolean rs = statement.execute("INSERT INTO public.threatdata2(threat, handle) VALUES(" + number + " , " + "'" + handle + "'" + ");");
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return "oh no it didn't work";
