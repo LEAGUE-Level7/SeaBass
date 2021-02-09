@@ -10,10 +10,14 @@ if (sampleForm) {
 	let accountInputField = document.getElementById("target");
 	let collectDataCheckbox = document.getElementById("collectDataCheckbox");
 	sampleForm.addEventListener("submit", (event) => {
+		const submitButton = document.getElementById("submit");
+		submitButton.classList.add("loader");
+		
 		event.preventDefault();
 		console.log("form submitted");
 		postData('http://localhost/getScore', { username: accountInputField.value, collectdata: collectDataCheckbox.checked })
 			.then(data => {
+				submitButton.classList.remove("loader");
 				bruh = data;
 				console.log(data);
 				myStorage.setItem("object", JSON.stringify(data))

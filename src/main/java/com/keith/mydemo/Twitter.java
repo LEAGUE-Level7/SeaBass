@@ -219,7 +219,10 @@ public class Twitter {
 					String id = arrayelement.getString("id");
 					
 					String details = getTweets(id, bearerToken);
-					
+					if(details == null) {
+						// this means rate limit exceeded
+						continue;
+					}
 					
 					JSONObject detailedObject = new JSONObject(details);
 					JSONArray dataArray = detailedObject.getJSONArray("data");
@@ -230,24 +233,6 @@ public class Twitter {
 						Tweet tweet = new Tweet(text, id, date);
 						list.add(tweet);
 					}
-					
-					
-//					System.out.println("id: " + arrayelement.getString("id"));
-//					System.out.println("text: " + arrayelement.getString("text"));
-//					System.out.println("date: " + getTweets(arrayelement.getString("id"), bearerToken));
-					
-					
-//					Tweet tweet = new Tweet(text, id, date);
-//					System.out.println(tweet);
-					
-//					URIBuilder uriBuilder = new URIBuilder("https://api.twitter.com/2/tweets");
-//					ArrayList<NameValuePair> queryParameters;
-//					queryParameters = new ArrayList<>();
-//					queryParameters.add(new BasicNameValuePair("ids", arrayelement.getString("id")));
-//					uriBuilder.addParameters(queryParameters);
-//					String asdf = getTweets(arrayelement.getString("id"), bearerToken);
-//					System.out.println(asdf);
-//					list.add(asdf);
 				}
 			}
 		}
@@ -274,6 +259,9 @@ public class Twitter {
 		HttpEntity entity = response.getEntity();
 		if (null != entity) {
 			userResponse = EntityUtils.toString(entity, "UTF-8");
+		}
+		if(userResponse.contains("Rate limit exceeded")) {
+			return null;
 		}
 		return userResponse;
 	}
