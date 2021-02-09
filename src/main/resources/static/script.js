@@ -1,7 +1,7 @@
 let bruh = {};
 const myStorage = window.localStorage
 
-function addSearchObject(value){
+function addSearchObject(value) {
 	console.log(value);
 }
 
@@ -15,7 +15,7 @@ if (sampleForm) {
 		
 		event.preventDefault();
 		console.log("form submitted");
-	    postData('http://localhost/getScore', { username: accountInputField.value, collectdata: collectDataCheckbox.checked })
+		postData('http://localhost/getScore', { username: accountInputField.value, collectdata: collectDataCheckbox.checked })
 			.then(data => {
 				submitButton.classList.remove("loader");
 				bruh = data;

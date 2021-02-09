@@ -1,16 +1,15 @@
 /* CSS files add styling rules to your content */
-
 body {
-    font-family: sans-serif, helvetica, arial;
-    /*   margin: 2em; */
-    background-color: #131435;
+	font-family: sans-serif, helvetica, arial;
+	/*   margin: 2em; */
+	background-color: #131435;
 }
 
 h1 {
-    font-family: sans-serif;
-    text-align: center;
-    color: #FFFFFF;
-    font-size: 54px;
+	font-family: sans-serif;
+	text-align: center;
+	color: #FFFFFF;
+	font-size: 54px;
 }
 
 h2 {
@@ -22,58 +21,56 @@ h2 {
 }
 
 .content {
-    width: 50%;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    border-style: solid;
-    color: white;
-    justify-content: center;
+	width: 50%;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	border-style: solid;
+	color: white;
+	justify-content: center;
 }
 
-    /* .content .contentItem { */
-        /*   border-color: white;
+/* .content .contentItem { */
+/*   border-color: white;
   border: solid 1px; */
-    /* } */
-
+/* } */
 .select {
-    text-align: center;
+	text-align: center;
 }
 
 .buttonstyle {
-    padding: 1em;
-    margin: 1rem;
-    background-color: #DDDDDD;
-    color: black;
-    border-radius: 10px;
+	padding: 1em;
+	margin: 1rem;
+	background-color: #DDDDDD;
+	color: black;
+	border-radius: 10px;
 }
 
-
 .labelstyle {
-    color: #FFFFFF;
-    font-weight: bold;
+	color: #FFFFFF;
+	font-weight: bold;
 }
 
 .check_box {
-    text-align: center;
-    border-color: white;
-    border: solid 1px;
-    padding: 0.5rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
+	text-align: center;
+	border-color: white;
+	border: solid 1px;
+	padding: 0.5rem;
+	margin-left: 1rem;
+	margin-right: 1rem;
 }
 
 span {
-    color: white;
-    text-align: center;
+	color: white;
+	text-align: center;
 }
 
 .input {
-    padding: 0.5em;
+	padding: 0.5em;
 }
 
 .hidden {
-    display: none;
+	display: none;
 }
 
 #canvas {
@@ -94,3 +91,4 @@ span {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
