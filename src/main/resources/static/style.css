@@ -13,11 +13,11 @@ h1 {
 }
 
 h2 {
-	font-family: sans-serif;
-	text-align: center;
-	padding-left: 2em;
-	padding-right: 2em;
-	color: #FFFFFF;
+    font-family: verdana, sans-serif;
+    text-align: center;
+    padding-left: 2em;
+    padding-right: 2em;
+    color: #FFFFFF;
 }
 
 .content {

@@ -91,7 +91,7 @@ public class MyController {
 			threat.setWorldAverage(worldAverage);
 			System.out.println("world average: " + worldAverage);
 			if (checked) {
-				DatabaseTest.putSomeData("" + threatLevel);
+				DatabaseTest.putSomeData("" + threatLevel , username);
 			}
 		}
 		return threat;
@@ -186,7 +186,7 @@ public class MyController {
 		if (number == null) {
 			return DatabaseTest.putData();
 		}
-		return DatabaseTest.putSomeData(number);
+		return DatabaseTest.putSomeData(number, "hi");
 	}
 
 	@GetMapping("/filterStreams")
