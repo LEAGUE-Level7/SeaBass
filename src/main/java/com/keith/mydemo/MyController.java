@@ -35,6 +35,11 @@ public class MyController {
 
 		boolean exists = Twitter.doesAccountExist(username);
 		ArrayList<String> suspiciousTweets = new ArrayList<String>();
+		if (Twitter.getLatestTweets(username).get(0).equals("error")) {
+			threat.setMessage("An error occured while getting the latest tweets, or you don't have any tweets posted in the last week. ");
+			threatLevel = 0;
+			return threat;
+		}
 		if (exists) {
 			threatLevel = 1;
 			threat.setMessage("All good");
@@ -63,6 +68,7 @@ public class MyController {
 					threatLevel++;
 				}
 			}
+
 		} else {
 			threat.setMessage("Account does not exist!");
 			threatLevel = 0;
@@ -85,7 +91,7 @@ public class MyController {
 			threat.setWorldAverage(worldAverage);
 			System.out.println("world average: " + worldAverage);
 			if (checked) {
-				DatabaseTest.putSomeData("" + threatLevel);
+				DatabaseTest.putSomeData("" + threatLevel , username);
 			}
 		}
 		return threat;
@@ -177,7 +183,7 @@ public class MyController {
 		if (number == null) {
 			return DatabaseTest.putData();
 		}
-		return DatabaseTest.putSomeData(number);
+		return DatabaseTest.putSomeData(number, "hi");
 	}
 
 	@GetMapping("/filterStreams")

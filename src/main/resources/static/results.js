@@ -5,9 +5,12 @@ function showThreatLevel() {
 	let data = JSON.parse(myStorage.getItem("object"))
 	threatLevel = data.threatLevel
 	const latestTweet = data.latestTweet
+	const message = data.message
 	let threatLevelValue = document.getElementById("threatLevelTitle");
 	let latestTweetValue = document.getElementById("latestTweet");
+	let messageValue = document.getElementById("message");
 	threatLevelValue.innerHTML = "Your Threat Level is: " + threatLevel;
+	messageValue.innerHTML = message;
 	if (latestTweet == undefined) {
 		latestTweetValue.innerHTML = " ";
 	} else {
