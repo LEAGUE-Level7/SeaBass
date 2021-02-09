@@ -1,7 +1,5 @@
 package com.seabass.doxing;
 
-import java.util.HashMap;
-
 public class Threat {
 	String username;
 	String latestTweet;

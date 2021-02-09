@@ -2,13 +2,9 @@ package com.seabass.doxing;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.io.*;
-import java.net.*;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

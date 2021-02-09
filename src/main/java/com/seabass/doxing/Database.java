@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 public class Database {
 	private static Connection connection = null;
@@ -47,8 +46,7 @@ public class Database {
 			int threat = rs.getInt("threat");
 			String handle = rs.getString("handle");
 			result += "{" + id + ":" + threat + ":" + handle + "}";
-			
-			
+
 			total += threat;
 			numbers++;
 
@@ -108,7 +106,8 @@ public class Database {
 		Statement statement;
 		try {
 			statement = connection.createStatement();
-			boolean rs = statement.execute("INSERT INTO public.threatdata2(threat, handle) VALUES(" + number + " , " + "'" + handle + "'" + ");");
+			boolean rs = statement.execute("INSERT INTO public.threatdata2(threat, handle) VALUES(" + number + " , "
+					+ "'" + handle + "'" + ");");
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return "oh no it didn't work";
