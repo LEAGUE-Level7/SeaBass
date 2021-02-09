@@ -34,36 +34,39 @@ public class MyController {
 		Threat threat = new Threat();
 
 		boolean exists = Twitter.doesAccountExist(username);
-		ArrayList<String> suspiciousTweets = new ArrayList<String>();
-		if (Twitter.getLatestTweets(username).get(0).equals("error")) {
+		ArrayList<Tweet> recentTweets = Twitter.getLatestTweets(username);
+		if(recentTweets.size() == 0 ) {
 			threat.setMessage(
 					"An error occured while getting the latest tweets, or you don't have any tweets posted in the last week. ");
 			threatLevel = 0;
 			return threat;
 		}
+		ArrayList<String> suspiciousTweets = new ArrayList<String>();
 		if (exists) {
 			threatLevel = 1;
 			threat.setMessage("All good");
 			String result = getLatestTweet(username);
 			threat.setLatestTweet(result);
-			for (String tweet : Twitter.getLatestTweets(username)) {
+			for (Tweet tweet : recentTweets) {
+				
+				String message = tweet.text;
+				String date = tweet.date;
+				
 				JSONObject jsonForTweet = new JSONObject(tweet);
-				String message = jsonForTweet.getJSONArray("data").getJSONObject(0).getString("text");
-				String date = jsonForTweet.getJSONArray("data").getJSONObject(0).getString("created_at");
-				if (tweet.toLowerCase().contains("tall")) {
+				if (message.toLowerCase().contains("tall")) {
 					suspiciousTweets.add(message + " - Your height was found");
 					threatLevel++;
 				}
-				if (tweet.toLowerCase().contains("name")) {
+				if (message.toLowerCase().contains("name")) {
 					suspiciousTweets.add(message + " - Your name was found");
 					threatLevel++;
 				}
-				if (tweet.toLowerCase().contains("birthday")) {
+				if (message.toLowerCase().contains("birthday")) {
 
 					suspiciousTweets.add(message + " - Birthday might be: " + date);
 					threatLevel++;
 				}
-				if (tweet.toLowerCase().contains("live")) {
+				if (message.toLowerCase().contains("live")) {
 					suspiciousTweets.add(message + " - Your location was found");
 					threatLevel++;
 				}
@@ -138,10 +141,14 @@ public class MyController {
 		}
 		try {
 			// This parses the json of the tweet results
-			ArrayList<String> tweets = Twitter.getLatestTweets(user);
-			JSONObject jsonobj = new JSONObject(tweets.get(0));
-			String text = jsonobj.getJSONArray("data").getJSONObject(0).getString("text");
-			return text;
+			ArrayList<Tweet> tweets = Twitter.getLatestTweets(user);
+			for(Tweet s : tweets) {
+				System.out.println(s);
+			}
+			if(tweets.size() > 0) {
+				return tweets.get(0).text;
+			}
+			return "no recent tweets";
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
