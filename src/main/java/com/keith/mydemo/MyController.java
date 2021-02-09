@@ -2,13 +2,9 @@ package com.keith.mydemo;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.io.*;
-import java.net.*;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,7 +32,8 @@ public class MyController {
 		boolean exists = Twitter.doesAccountExist(username);
 		ArrayList<String> suspiciousTweets = new ArrayList<String>();
 		if (Twitter.getLatestTweets(username).get(0).equals("error")) {
-			threat.setMessage("An error occured while getting the latest tweets, or you don't have any tweets posted in the last week. ");
+			threat.setMessage(
+					"An error occured while getting the latest tweets, or you don't have any tweets posted in the last week. ");
 			threatLevel = 0;
 			return threat;
 		}
@@ -91,7 +88,7 @@ public class MyController {
 			threat.setWorldAverage(worldAverage);
 			System.out.println("world average: " + worldAverage);
 			if (checked) {
-				DatabaseTest.putSomeData("" + threatLevel , username);
+				DatabaseTest.putSomeData("" + threatLevel, username);
 			}
 		}
 		return threat;
