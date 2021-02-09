@@ -209,20 +209,17 @@ public class Twitter {
 		if (null != bearerToken) {
 			// Replace comma separated usernames with usernames of your choice
 			String response = getLatestTweetsJSON(user, bearerToken);
-			System.out.println(response);
 			JSONObject jsonobj = new JSONObject(response);
 			JSONArray jsonarr = null;
 			if (jsonobj.has("data")) {
 				jsonarr = jsonobj.getJSONArray("data");
 				for (int i = 0; i < jsonarr.length() && i < 10; i++) {
 					JSONObject arrayelement = jsonarr.getJSONObject(i);
-					System.out.println(arrayelement);
 					
 					String id = arrayelement.getString("id");
 					
 					String details = getTweets(id, bearerToken);
 					
-					System.out.println("details:" + details);
 					
 					JSONObject detailedObject = new JSONObject(details);
 					JSONArray dataArray = detailedObject.getJSONArray("data");
@@ -231,7 +228,6 @@ public class Twitter {
 						String text = thetweetobject.getString("text");
 						String date = thetweetobject.getString("created_at");
 						Tweet tweet = new Tweet(text, id, date);
-						System.out.println("tweet: " + tweet);
 						list.add(tweet);
 					}
 					
@@ -329,7 +325,6 @@ public class Twitter {
 			BufferedReader reader = new BufferedReader(new InputStreamReader((entity.getContent())));
 			String line = reader.readLine();
 			while (line != null) {
-				System.out.println(line);
 				line = reader.readLine();
 			}
 		}
