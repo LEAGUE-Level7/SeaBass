@@ -213,22 +213,23 @@ public class Twitter {
 				jsonarr = jsonobj.getJSONArray("data");
 				for (int i = 0; i < jsonarr.length(); i++) {
 					JSONObject arrayelement = jsonarr.getJSONObject(i);
-					//System.out.println("id: " + arrayelement.getString("id"));
-					//System.out.println("text: " + arrayelement.getString("text"));
-					//System.out.println("date: " + getTweets(arrayelement.getString("id"), bearerToken));
+					// System.out.println("id: " + arrayelement.getString("id"));
+					// System.out.println("text: " + arrayelement.getString("text"));
+					// System.out.println("date: " + getTweets(arrayelement.getString("id"),
+					// bearerToken));
 					URIBuilder uriBuilder = new URIBuilder("https://api.twitter.com/2/tweets");
 					ArrayList<NameValuePair> queryParameters;
 					queryParameters = new ArrayList<>();
 					queryParameters.add(new BasicNameValuePair("ids", arrayelement.getString("id")));
 					uriBuilder.addParameters(queryParameters);
-					list.add(arrayelement.getString("text") + getTweets(arrayelement.getString("id"), bearerToken));
+					list.add(getTweets(arrayelement.getString("id"), bearerToken));
 				}
-			}else {
+			} else {
 				ArrayList<String> oof = new ArrayList<String>();
 				oof.add("error");
 				return oof;
 			}
-			
+
 		}
 		return list;
 	}

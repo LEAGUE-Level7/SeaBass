@@ -36,7 +36,8 @@ public class MyController {
 		boolean exists = Twitter.doesAccountExist(username);
 		ArrayList<String> suspiciousTweets = new ArrayList<String>();
 		if (Twitter.getLatestTweets(username).get(0).equals("error")) {
-			threat.setMessage("An error occured while getting the latest tweets, or you don't have any tweets posted in the last week. ");
+			threat.setMessage(
+					"An error occured while getting the latest tweets, or you don't have any tweets posted in the last week. ");
 			threatLevel = 0;
 			return threat;
 		}
@@ -46,10 +47,9 @@ public class MyController {
 			String result = getLatestTweet(username);
 			threat.setLatestTweet(result);
 			for (String tweet : Twitter.getLatestTweets(username)) {
-				String date = tweet.substring(tweet.indexOf("{\"created_at\":\"") + "{\"created_at\":\"".length(),
-						tweet.indexOf(".000Z\",\"id\""));
-				String message = tweet.substring(tweet.indexOf("\"text\":") + "\"text\":".length(),
-						tweet.indexOf("}]}"));
+				JSONObject jsonForTweet = new JSONObject(tweet);
+				String message = jsonForTweet.getJSONArray("data").getJSONObject(0).getString("text");
+				String date = jsonForTweet.getJSONArray("data").getJSONObject(0).getString("created_at");
 				if (tweet.toLowerCase().contains("tall")) {
 					suspiciousTweets.add(message + " - Your height was found");
 					threatLevel++;
@@ -139,7 +139,10 @@ public class MyController {
 		try {
 			// This parses the json of the tweet results
 			ArrayList<String> tweets = Twitter.getLatestTweets(user);
-			return tweets.get(0);
+			JSONObject jsonobj = new JSONObject(tweets.get(0));
+			String text = jsonobj.getJSONArray("data").getJSONObject(0).getString("text");
+			return text;
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
