@@ -1,4 +1,4 @@
-package com.keith.mydemo;
+package com.seabass.doxing;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,7 +30,6 @@ public class Twitter {
 	// To set your enviornment variables in your terminal run the following line:
 	// export 'BEARER_TOKEN'='<your_bearer_token>'
 	final static String bearerToken = System.getenv("BEARER_TOKEN");
-
 	public static void showFilteredStream() throws IOException, URISyntaxException {
 		if (null != bearerToken) {
 			Map<String, String> rules = new HashMap<>();
@@ -203,8 +202,7 @@ public class Twitter {
 	 */
 	public static ArrayList<String> getLatestTweets(String user) throws IOException, URISyntaxException {
 		 
-		//System.out.println(bearerToken);
-		String bearerToken = System.getenv("BEARER_TOKEN");
+
 		ArrayList<String> list = new ArrayList<>();
 		if (null != bearerToken) {
 			// Replace comma separated usernames with usernames of your choice

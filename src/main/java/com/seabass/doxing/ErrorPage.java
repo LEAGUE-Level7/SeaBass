@@ -1,4 +1,4 @@
-package com.keith.mydemo;
+package com.seabass.doxing;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;

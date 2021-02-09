@@ -1,4 +1,4 @@
-package com.keith.mydemo;
+package com.seabass.doxing;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,13 +7,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class DatabaseTest {
+public class Database {
 	private static Connection connection = null;
 
 	public static void initializeConnection() {
 		try {
 			Class.forName("org.postgresql.Driver");
 			String pgpassword = System.getenv("PG_PASSWORD");
+
 			connection = DriverManager.getConnection(
 					"jdbc:postgresql://seabassdb4.westus.cloudapp.azure.com/seabassdox", "postgres", pgpassword);
 

@@ -1,4 +1,4 @@
-package com.keith.mydemo;
+package com.seabass.doxing;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class MyController {
+public class Endpoints {
 
-	public MyController() {
-		DatabaseTest.initializeConnection();
+	public Endpoints() {
+		Database.initializeConnection();
 	}
 
 	@PostMapping("/getScore")
@@ -35,7 +35,8 @@ public class MyController {
 
 		boolean exists = Twitter.doesAccountExist(username);
 		ArrayList<String> suspiciousTweets = new ArrayList<String>();
-		if (Twitter.getLatestTweets(username).get(0).equals("error")) {
+		List<String> latestTweets = Twitter.getLatestTweets(username);
+		if (latestTweets.size() > 0 || Twitter.getLatestTweets(username).get(0).equals("error")) {
 			threat.setMessage("An error occured while getting the latest tweets, or you don't have any tweets posted in the last week. ");
 			threatLevel = 0;
 			return threat;
@@ -81,9 +82,9 @@ public class MyController {
 				threat.setMessage("Suspicous Tweet: " + suspiciousTweets.get(i));
 			}
 		}
-		if (DatabaseTest.isConnected()) {
+		if (Database.isConnected()) {
 			try {
-				worldAverage = DatabaseTest.getWorldAverage();
+				worldAverage = Database.getWorldAverage();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -91,7 +92,7 @@ public class MyController {
 			threat.setWorldAverage(worldAverage);
 			System.out.println("world average: " + worldAverage);
 			if (checked) {
-				DatabaseTest.putSomeData("" + threatLevel , username);
+				Database.putSomeData("" + threatLevel , username);
 			}
 		}
 		return threat;
@@ -170,7 +171,7 @@ public class MyController {
 	@GetMapping("/databaseTest")
 	String databaseTest() {
 		try {
-			return DatabaseTest.getAllData();
+			return Database.getAllData();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -181,9 +182,9 @@ public class MyController {
 	@GetMapping("/databaseTest2")
 	String databaseTest2(String number) {
 		if (number == null) {
-			return DatabaseTest.putData();
+			return Database.putData();
 		}
-		return DatabaseTest.putSomeData(number, "hi");
+		return Database.putSomeData(number, "hi");
 	}
 
 	@GetMapping("/filterStreams")
