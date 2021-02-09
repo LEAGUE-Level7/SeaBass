@@ -35,6 +35,11 @@ public class MyController {
 
 		boolean exists = Twitter.doesAccountExist(username);
 		ArrayList<String> suspiciousTweets = new ArrayList<String>();
+		if (Twitter.getLatestTweets(username).get(0).equals("error")) {
+			threat.setMessage("An error occured while getting the latest tweets, or you don't have any tweets posted in the last week. ");
+			threatLevel = 0;
+			return threat;
+		}
 		if (exists) {
 			threatLevel = 1;
 			threat.setMessage("All good");
@@ -63,6 +68,7 @@ public class MyController {
 					threatLevel++;
 				}
 			}
+
 		} else {
 			threat.setMessage("Account does not exist!");
 			threatLevel = 0;
