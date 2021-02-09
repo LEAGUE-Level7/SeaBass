@@ -52,7 +52,6 @@ public class MyController {
 				String message = tweet.text;
 				String date = tweet.date;
 				
-				JSONObject jsonForTweet = new JSONObject(tweet);
 				if (message.toLowerCase().contains("tall")) {
 					suspiciousTweets.add(message + " - Your height was found");
 					threatLevel++;
