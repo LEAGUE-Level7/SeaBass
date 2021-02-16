@@ -79,11 +79,14 @@ public class Database {
 		}
 
 		try {
-			while (rs1.next()) {
-				//String username = rs1.getString("handle");
-				boolean rs = statement.execute("BEGIN \nINSERT INTO public.threatdata2(threat, handle) VALUES(" + number + " , " + "'"
-						+ handle + "'" + "); \nEXCEPTION WHEN unique_violation THEN\nEND;");
-			}
+			String insertReplaceCommand = 
+					"INSERT INTO public.threatdata2(threat, handle) " +
+					"VALUES(" + number + ",'" + handle + "') " +
+					"ON CONFLICT(handle) DO UPDATE SET threat = excluded.threat";
+			// this command was giving me errors on the BEGIN statement so changed it to the above instead
+			String insertExceptionCommand = "BEGIN \nINSERT INTO public.threatdata2(threat, handle) VALUES(" + number + " , " + "'"
+					+ handle + "'" + "); \nEXCEPTION WHEN unique_violation THEN\nEND;";
+			boolean rs = statement.execute(insertReplaceCommand);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return "oh no it didn't work";
