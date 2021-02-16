@@ -1,6 +1,4 @@
-package com.keith.mydemo;
-
-import java.util.HashMap;
+package com.seabass.doxing;
 
 public class Threat {
 	String username;

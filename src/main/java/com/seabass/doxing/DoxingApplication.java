@@ -1,12 +1,11 @@
-package com.keith.mydemo;
+package com.seabass.doxing;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MyDemoApplication {
+public class DoxingApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(MyDemoApplication.class, args);
-
+		SpringApplication.run(DoxingApplication.class, args);
 	}
 }

@@ -1,14 +1,10 @@
-package com.keith.mydemo;
+package com.seabass.doxing;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.io.*;
-import java.net.*;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class MyController {
+public class Endpoints {
 
-	public MyController() {
-		DatabaseTest.initializeConnection();
+	public Endpoints() {
+		Database.initializeConnection();
 	}
 
 	@PostMapping("/getScore")
@@ -34,36 +30,39 @@ public class MyController {
 		Threat threat = new Threat();
 
 		boolean exists = Twitter.doesAccountExist(username);
-		ArrayList<String> suspiciousTweets = new ArrayList<String>();
-		if (Twitter.getLatestTweets(username).get(0).equals("error")) {
+
+		ArrayList<Tweet> recentTweets = Twitter.getLatestTweets(username);
+		if (recentTweets.size() == 0) {
 			threat.setMessage(
 					"An error occured while getting the latest tweets, or you don't have any tweets posted in the last week. ");
 			threatLevel = 0;
 			return threat;
 		}
+		ArrayList<String> suspiciousTweets = new ArrayList<String>();
 		if (exists) {
 			threatLevel = 1;
 			threat.setMessage("All good");
 			String result = getLatestTweet(username);
 			threat.setLatestTweet(result);
-			for (String tweet : Twitter.getLatestTweets(username)) {
-				JSONObject jsonForTweet = new JSONObject(tweet);
-				String message = jsonForTweet.getJSONArray("data").getJSONObject(0).getString("text");
-				String date = jsonForTweet.getJSONArray("data").getJSONObject(0).getString("created_at");
-				if (tweet.toLowerCase().contains("tall")) {
+			for (Tweet tweet : recentTweets) {
+
+				String message = tweet.text;
+				String date = tweet.date;
+
+				if (message.toLowerCase().contains("tall")) {
 					suspiciousTweets.add(message + " - Your height was found");
 					threatLevel++;
 				}
-				if (tweet.toLowerCase().contains("name")) {
+				if (message.toLowerCase().contains("name")) {
 					suspiciousTweets.add(message + " - Your name was found");
 					threatLevel++;
 				}
-				if (tweet.toLowerCase().contains("birthday")) {
+				if (message.toLowerCase().contains("birthday")) {
 
 					suspiciousTweets.add(message + " - Birthday might be: " + date);
 					threatLevel++;
 				}
-				if (tweet.toLowerCase().contains("live")) {
+				if (message.toLowerCase().contains("live")) {
 					suspiciousTweets.add(message + " - Your location was found");
 					threatLevel++;
 				}
@@ -81,9 +80,9 @@ public class MyController {
 				threat.setMessage("Suspicous Tweet: " + suspiciousTweets.get(i));
 			}
 		}
-		if (DatabaseTest.isConnected()) {
+		if (Database.isConnected()) {
 			try {
-				worldAverage = DatabaseTest.getWorldAverage();
+				worldAverage = Database.getWorldAverage();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -91,7 +90,7 @@ public class MyController {
 			threat.setWorldAverage(worldAverage);
 			System.out.println("world average: " + worldAverage);
 			if (checked) {
-				DatabaseTest.putSomeData("" + threatLevel , username);
+				Database.putSomeData("" + threatLevel, username);
 			}
 		}
 		return threat;
@@ -138,10 +137,14 @@ public class MyController {
 		}
 		try {
 			// This parses the json of the tweet results
-			ArrayList<String> tweets = Twitter.getLatestTweets(user);
-			JSONObject jsonobj = new JSONObject(tweets.get(0));
-			String text = jsonobj.getJSONArray("data").getJSONObject(0).getString("text");
-			return text;
+			ArrayList<Tweet> tweets = Twitter.getLatestTweets(user);
+			for (Tweet s : tweets) {
+				System.out.println(s);
+			}
+			if (tweets.size() > 0) {
+				return tweets.get(0).text;
+			}
+			return "no recent tweets";
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -173,7 +176,7 @@ public class MyController {
 	@GetMapping("/databaseTest")
 	String databaseTest() {
 		try {
-			return DatabaseTest.getAllData();
+			return Database.getAllData();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -184,9 +187,9 @@ public class MyController {
 	@GetMapping("/databaseTest2")
 	String databaseTest2(String number) {
 		if (number == null) {
-			return DatabaseTest.putData();
+			return Database.putData();
 		}
-		return DatabaseTest.putSomeData(number, "hi");
+		return Database.putSomeData(number, "hi");
 	}
 
 	@GetMapping("/filterStreams")

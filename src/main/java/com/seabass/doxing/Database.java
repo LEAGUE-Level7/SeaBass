@@ -1,19 +1,19 @@
-package com.keith.mydemo;
+package com.seabass.doxing;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
-public class DatabaseTest {
+public class Database {
 	private static Connection connection = null;
 
 	public static void initializeConnection() {
 		try {
 			Class.forName("org.postgresql.Driver");
 			String pgpassword = System.getenv("PG_PASSWORD");
+
 			connection = DriverManager.getConnection(
 					"jdbc:postgresql://seabassdb4.westus.cloudapp.azure.com/seabassdox", "postgres", pgpassword);
 
@@ -46,8 +46,7 @@ public class DatabaseTest {
 			int threat = rs.getInt("threat");
 			String handle = rs.getString("handle");
 			result += "{" + id + ":" + threat + ":" + handle + "}";
-			
-			
+
 			total += threat;
 			numbers++;
 
@@ -107,7 +106,8 @@ public class DatabaseTest {
 		Statement statement;
 		try {
 			statement = connection.createStatement();
-			boolean rs = statement.execute("INSERT INTO public.threatdata2(threat, handle) VALUES(" + number + " , " + "'" + handle + "'" + ");");
+			boolean rs = statement.execute("INSERT INTO public.threatdata2(threat, handle) VALUES(" + number + " , "
+					+ "'" + handle + "'" + ");");
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return "oh no it didn't work";
