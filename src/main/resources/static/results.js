@@ -6,11 +6,14 @@ function showThreatLevel() {
 	threatLevel = data.threatLevel
 	const latestTweet = data.latestTweet
 	const message = data.message
+	const worldAvg =  data.worldAvg
 	let threatLevelValue = document.getElementById("threatLevelTitle");
 	let latestTweetValue = document.getElementById("latestTweet");
 	let messageValue = document.getElementById("message");
+	let WAValue = document.getElementById("worldAverage");
 	threatLevelValue.innerHTML = "Your Threat Level is: " + threatLevel;
 	messageValue.innerHTML = message;
+	WAValue.innerHTML = "The world average is: "+worldAvg
 	if (latestTweet == undefined) {
 		latestTweetValue.innerHTML = " ";
 	} else {
