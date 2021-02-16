@@ -1,4 +1,4 @@
-package com.keith.mydemo;
+package com.seabass.doxing;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -47,19 +47,19 @@ public class Twitter {
 	}
 
 	public static boolean doesAccountExist(String username) throws IOException, URISyntaxException {
-		 
-		//System.out.println(bearerToken);
+
+		// System.out.println(bearerToken);
 		if (null != bearerToken) {
 			// Replace comma separated usernames with usernames of your choice
 			String response = getUsers(username, bearerToken);
-			//System.out.println(response);
+			// System.out.println(response);
 
 			JSONObject jsonobj = new JSONObject(response);
 			if (jsonobj.has("errors")) {
-				//System.out.println("There is an 'errors' field");
+				// System.out.println("There is an 'errors' field");
 				return false;
 			} else if (jsonobj.has("data")) {
-				//System.out.println("There is a 'data' field");
+				// System.out.println("There is a 'data' field");
 				return true;
 			}
 
@@ -68,24 +68,24 @@ public class Twitter {
 	}
 
 	public static String showUser(String username) throws IOException, URISyntaxException {
-		 
+
 		System.out.println(bearerToken);
 		if (null != bearerToken) {
 			// Replace comma separated usernames with usernames of your choice
 			String response = getUsers(username, bearerToken);
-			//System.out.println(response);
+			// System.out.println(response);
 			return response;
 		}
 		return "There was a problem getting you bearer token. Please make sure you set the BEARER_TOKEN environment variable";
 	}
 
 	public static String showSearch(String searchString) throws IOException, URISyntaxException {
-		 
-		//System.out.println(bearerToken);
+
+		// System.out.println(bearerToken);
 		if (null != bearerToken) {
 			// Replace comma separated usernames with usernames of your choice
 			String response = search(searchString, bearerToken);
-			//System.out.println(response);
+			// System.out.println(response);
 			return response;
 		}
 		return "There was a problem getting you bearer token. Please make sure you set the BEARER_TOKEN environment variable";
@@ -98,7 +98,7 @@ public class Twitter {
 	 * verified, withheld }
 	 */
 	public static HashMap<String, Object> getUserInfo(String username) {
-		 
+
 		String userInfo = "";
 		try {
 			userInfo = getUsers(username, bearerToken);
@@ -175,24 +175,24 @@ public class Twitter {
 	// export 'BEARER_TOKEN'='<your_bearer_token>'
 
 	public static String doUser(String username) throws IOException, URISyntaxException {
-		 
-		//System.out.println(bearerToken);
+
+		// System.out.println(bearerToken);
 		if (null != bearerToken) {
 			// Replace comma separated usernames with usernames of your choice
 			String response = getUsers(username, bearerToken);
-			//System.out.println(response);
+			// System.out.println(response);
 			return response;
 		}
 		return "There was a problem getting you bearer token. Please make sure you set the BEARER_TOKEN environment variable";
 	}
 
 	public static String dotweet(String ids) throws IOException, URISyntaxException {
-		 
+
 		System.out.println(bearerToken);
 		if (null != bearerToken) {
 			// Replace comma separated usernames with usernames of your choice
 			String response = getTweets(ids, bearerToken);
-			//System.out.println(response);
+			// System.out.println(response);
 			return response;
 		}
 		return "There was a problem getting you bearer token. Please make sure you set the BEARER_TOKEN environment variable";
@@ -202,8 +202,6 @@ public class Twitter {
 	 * Returns and array of strings. Each string is a recent tweet from the user.
 	 */
 	public static ArrayList<Tweet> getLatestTweets(String user) throws IOException, URISyntaxException {
-		 
-		//System.out.println(bearerToken);
 		String bearerToken = System.getenv("BEARER_TOKEN");
 		ArrayList<Tweet> list = new ArrayList<>();
 		if (null != bearerToken) {
@@ -215,18 +213,18 @@ public class Twitter {
 				jsonarr = jsonobj.getJSONArray("data");
 				for (int i = 0; i < jsonarr.length() && i < 10; i++) {
 					JSONObject arrayelement = jsonarr.getJSONObject(i);
-					
+
 					String id = arrayelement.getString("id");
-					
+
 					String details = getTweets(id, bearerToken);
-					if(details == null) {
+					if (details == null) {
 						// this means rate limit exceeded
 						continue;
 					}
-					
+
 					JSONObject detailedObject = new JSONObject(details);
 					JSONArray dataArray = detailedObject.getJSONArray("data");
-					if(dataArray.length() > 0 ) {
+					if (dataArray.length() > 0) {
 						JSONObject thetweetobject = dataArray.getJSONObject(0);
 						String text = thetweetobject.getString("text");
 						String date = thetweetobject.getString("created_at");
@@ -260,7 +258,7 @@ public class Twitter {
 		if (null != entity) {
 			userResponse = EntityUtils.toString(entity, "UTF-8");
 		}
-		if(userResponse.contains("Rate limit exceeded")) {
+		if (userResponse.contains("Rate limit exceeded")) {
 			return null;
 		}
 		return userResponse;
@@ -281,7 +279,7 @@ public class Twitter {
 		queryParameters = new ArrayList<>();
 		queryParameters.add(new BasicNameValuePair("query", "from:" + user));
 		uriBuilder.addParameters(queryParameters);
-		//System.out.println("eeeeeeeeeeeeeee: " + uriBuilder.build());
+		// System.out.println("eeeeeeeeeeeeeee: " + uriBuilder.build());
 		HttpGet httpGet = new HttpGet(uriBuilder.build());
 		httpGet.setHeader("Authorization", String.format("Bearer %s", bearerToken));
 		httpGet.setHeader("Content-Type", "application/json");
@@ -399,7 +397,7 @@ public class Twitter {
 		HttpResponse response = httpClient.execute(httpPost);
 		HttpEntity entity = response.getEntity();
 		if (null != entity) {
-			//System.out.println(EntityUtils.toString(entity, "UTF-8"));
+			// System.out.println(EntityUtils.toString(entity, "UTF-8"));
 		}
 	}
 
