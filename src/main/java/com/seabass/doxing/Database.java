@@ -70,44 +70,20 @@ public class Database {
 		return result;
 	}
 
-	public static String putData() {
+	public static String putSomeData(String number, String handle) throws SQLException {
+		Statement statement = connection.createStatement();
+		ResultSet rs1 = statement.executeQuery("SELECT * FROM threatdata2");
+
 		if (connection == null) {
 			return "database error";
 		}
-		Statement statement;
-		String result = "";
-		int totalIdVals = 0;
-		int numThreats = 1;
-		try {
-			statement = connection.createStatement();
-			statement.execute("INSERT INTO threatdata2(threat, handle) VALUES (35, 'asdf')");
-			ResultSet rs = statement.executeQuery("SELECT * FROM threatdata2");
-			while (rs.next()) {
 
-				int id = rs.getInt("id");
-				int threat = rs.getInt("threat");
-				result += "{" + id + ":" + threat + "} ";
-				totalIdVals += threat;
-				numThreats += 1;
+		try {
+			while (rs1.next()) {
+				//String username = rs1.getString("handle");
+				boolean rs = statement.execute("BEGIN \nINSERT INTO public.threatdata2(threat, handle) VALUES(" + number + " , " + "'"
+						+ handle + "'" + "); \nEXCEPTION WHEN unique_violation THEN\nEND;");
 			}
-			totalIdVals /= numThreats;
-			result += "\n the average is: " + totalIdVals;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return result;
-	}
-
-	public static String putSomeData(String number, String handle) {
-		if (connection == null) {
-			return "database error";
-		}
-		Statement statement;
-		try {
-			statement = connection.createStatement();
-			boolean rs = statement.execute("INSERT INTO public.threatdata2(threat, handle) VALUES(" + number + " , "
-					+ "'" + handle + "'" + ");");
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return "oh no it didn't work";

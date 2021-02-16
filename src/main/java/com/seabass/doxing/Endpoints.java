@@ -19,7 +19,7 @@ public class Endpoints {
 	}
 
 	@PostMapping("/getScore")
-	Threat myMethod(@RequestBody String body) throws IOException, URISyntaxException {
+	Threat myMethod(@RequestBody String body) throws IOException, URISyntaxException, SQLException {
 		System.out.println("post request: " + body);
 		JSONObject jsonobj = new JSONObject(body);
 		String username = jsonobj.getString("username");
@@ -185,9 +185,9 @@ public class Endpoints {
 	}
 
 	@GetMapping("/databaseTest2")
-	String databaseTest2(String number) {
+	String databaseTest2(String number) throws SQLException {
 		if (number == null) {
-			return Database.putData();
+			return null;
 		}
 		return Database.putSomeData(number, "hi");
 	}
