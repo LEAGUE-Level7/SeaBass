@@ -13,7 +13,7 @@ public class Database {
 		try {
 			Class.forName("org.postgresql.Driver");
 			String pgpassword = System.getenv("PG_PASSWORD");
-
+			System.out.println("PG_PASSWORD is "+ pgpassword);
 			connection = DriverManager.getConnection(
 					"jdbc:postgresql://seabassdb4.westus.cloudapp.azure.com/seabassdox", "postgres", pgpassword);
 
