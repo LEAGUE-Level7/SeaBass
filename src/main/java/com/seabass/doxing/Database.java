@@ -13,9 +13,10 @@ public class Database {
 		try {
 			Class.forName("org.postgresql.Driver");
 			String pgpassword = System.getenv("PG_PASSWORD");
-			System.out.println("PG_PASSWORD is "+ pgpassword);
+
 			connection = DriverManager.getConnection(
-					"jdbc:postgresql://seabassdb4.westus.cloudapp.azure.com/seabassdox?sslmode=disable", "postgres", pgpassword);
+					"jdbc:postgresql://seabassdb4.westus.cloudapp.azure.com/seabassdox?sslmode=disable", "postgres",
+					pgpassword);
 
 			System.out.println("Connected to database!");
 		} catch (Exception e) {
@@ -79,13 +80,12 @@ public class Database {
 		}
 
 		try {
-			String insertReplaceCommand = 
-					"INSERT INTO public.threatdata2(threat, handle) " +
-					"VALUES(" + number + ",'" + handle + "') " +
-					"ON CONFLICT(handle) DO UPDATE SET threat = excluded.threat";
-			// this command was giving me errors on the BEGIN statement so changed it to the above instead
-			String insertExceptionCommand = "BEGIN \nINSERT INTO public.threatdata2(threat, handle) VALUES(" + number + " , " + "'"
-					+ handle + "'" + "); \nEXCEPTION WHEN unique_violation THEN\nEND;";
+			String insertReplaceCommand = "INSERT INTO public.threatdata2(threat, handle) " + "VALUES(" + number + ",'"
+					+ handle + "') " + "ON CONFLICT(handle) DO UPDATE SET threat = excluded.threat";
+			// this command was giving me errors on the BEGIN statement so changed it to the
+			// above instead
+			String insertExceptionCommand = "BEGIN \nINSERT INTO public.threatdata2(threat, handle) VALUES(" + number
+					+ " , " + "'" + handle + "'" + "); \nEXCEPTION WHEN unique_violation THEN\nEND;";
 			boolean rs = statement.execute(insertReplaceCommand);
 		} catch (SQLException e) {
 			e.printStackTrace();
