@@ -15,7 +15,7 @@ if (sampleForm) {
 		
 		event.preventDefault();
 		console.log("form submitted");
-		postData('http://localhost/getScore', { username: accountInputField.value, collectdata: collectDataCheckbox.checked })
+		postData('https://calm-escarpment-60393.herokuapp.com/getScore', { username: accountInputField.value, collectdata: collectDataCheckbox.checked })
 			.then(data => {
 				submitButton.classList.remove("loader");
 				bruh = data;
