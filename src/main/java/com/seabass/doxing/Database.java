@@ -15,7 +15,7 @@ public class Database {
 			String pgpassword = System.getenv("PG_PASSWORD");
 			System.out.println("PG_PASSWORD is "+ pgpassword);
 			connection = DriverManager.getConnection(
-					"jdbc:postgresql://seabassdb4.westus.cloudapp.azure.com/seabassdox", "postgres", pgpassword);
+					"jdbc:postgresql://seabassdb4.westus.cloudapp.azure.com/seabassdox?sslmode=disable", "postgres", pgpassword);
 
 			System.out.println("Connected to database!");
 		} catch (Exception e) {
