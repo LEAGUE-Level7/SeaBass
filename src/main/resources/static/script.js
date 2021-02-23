@@ -21,7 +21,7 @@ if (sampleForm) {
 				bruh = data;
 				console.log(data);
 				myStorage.setItem("object", JSON.stringify(data))
-				window.location.href = "http://localhost/results";// JSON data parsed by `data.json()` call
+				window.location.href = "https://calm-escarpment-60393.herokuapp.com/results";// JSON data parsed by `data.json()` call
 				let result = JSON.parse(myStorage.getItem("object"))
 				console.log(JSON.stringify(result));
 			});
