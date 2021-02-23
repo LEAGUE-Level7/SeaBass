@@ -41,7 +41,7 @@ public class Endpoints {
 		ArrayList<String> suspiciousTweets = new ArrayList<String>();
 		if (exists) {
 			threatLevel = 1;
-			threat.setMessage("All good");
+			threat.setMessage("");
 			String result = getLatestTweet(username);
 			threat.setLatestTweet(result);
 			for (Tweet tweet : recentTweets) {
