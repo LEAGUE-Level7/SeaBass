@@ -1,0 +1,100 @@
+2021-02-23T01:47:14.402143+00:00 heroku[router]: at=info method=GET path="/results" host=calm-escarpment-60393.herokuapp.com request_id=8888e123-26ff-45c9-852a-973a7799cd71 fwd="66.75.52.162" dyno=web.1 connect=1ms service=7ms status=304 bytes=208 protocol=https
+2021-02-23T01:47:14.508241+00:00 heroku[router]: at=info method=GET path="/results.js" host=calm-escarpment-60393.herokuapp.com request_id=0437e39b-6830-4e80-9c22-77462e20a51f fwd="66.75.52.162" dyno=web.1 connect=1ms service=7ms status=304 bytes=208 protocol=https
+2021-02-23T01:49:04.988613+00:00 app[web.1]: post request: {"username":"elonmusk","collectdata":true}
+2021-02-23T01:49:08.304275+00:00 app[web.1]: id:1363993259756945410, date:2021-02-22T23:25:09.000Z, text:@jgrano305 @AustinTeslaClub We have too much product complexity already
+2021-02-23T01:49:08.304425+00:00 app[web.1]: id:1363947211277496320, date:2021-02-22T20:22:10.000Z, text:@TechAmazing @UniverCurious Tunnels!!
+2021-02-23T01:49:08.304541+00:00 app[web.1]: id:1363946979005399040, date:2021-02-22T20:21:15.000Z, text:@JantieWillie @Adamklotz_ @AustinTeslaClub Hopefully, later this year
+2021-02-23T01:49:08.304713+00:00 app[web.1]: id:1363946926983405573, date:2021-02-22T20:21:02.000Z, text:@Adamklotz_ @AustinTeslaClub Later this year
+2021-02-23T01:49:08.304797+00:00 app[web.1]: id:1363946797945679875, date:2021-02-22T20:20:32.000Z, text:@jgrano305 @AustinTeslaClub It is still available off menu, but I don’t think the range, in many drive conditions, yet meets the Tesla standard of excellence
+2021-02-23T01:49:08.304992+00:00 app[web.1]: id:1363944709501067264, date:2021-02-22T20:12:14.000Z, text:@AustinTeslaClub The Tesla Solar Roof is slightly hydrophobic, so water, snow or ice slide off easily
+2021-02-23T01:49:08.305098+00:00 app[web.1]: id:1363783322770448386, date:2021-02-22T09:30:56.000Z, text:@teslaownersSV Final design is looking👌
+2021-02-23T01:49:08.305136+00:00 app[web.1]: Was just in the studio
+2021-02-23T01:49:08.305197+00:00 app[web.1]: id:1363774017606348802, date:2021-02-22T08:53:58.000Z, text:@eugenelee3 @SpaceXFan97 Most of Earth by end of year, all by next year, then it’s about densifying coverage.
+2021-02-23T01:49:08.305198+00:00 app[web.1]: 
+2021-02-23T01:49:08.305199+00:00 app[web.1]: Important to note that cellular will always have the advantage in dense urban areas.
+2021-02-23T01:49:08.305199+00:00 app[web.1]: 
+2021-02-23T01:49:08.305250+00:00 app[web.1]: Satellites are best for low to medium population density areas.
+2021-02-23T01:49:08.305330+00:00 app[web.1]: id:1363763858121256963, date:2021-02-22T08:13:35.000Z, text:@SpaceXFan97 Speed will double to ~300Mb/s &amp; latency will drop to ~20ms later this year
+2021-02-23T01:49:08.305684+00:00 app[web.1]: id:1363627518830338051, date:2021-02-21T23:11:50.000Z, text:Of spaceflight
+2021-02-23T01:49:08.308468+00:00 heroku[router]: at=info method=POST path="/getScore" host=calm-escarpment-60393.herokuapp.com request_id=06e63ecf-1cbe-4d7f-83d1-34f76e45a89f fwd="73.193.5.29" dyno=web.1 connect=0ms service=3323ms status=200 bytes=307 protocol=https
+2021-02-23T01:49:08.446843+00:00 heroku[router]: at=info method=GET path="/results" host=calm-escarpment-60393.herokuapp.com request_id=9d3a04b2-492b-40ad-abb6-d70560ae534e fwd="73.193.5.29" dyno=web.1 connect=0ms service=7ms status=304 bytes=208 protocol=https
+2021-02-23T01:49:08.639450+00:00 heroku[web.1]: Restarting
+2021-02-23T01:49:08.644274+00:00 heroku[web.1]: State changed from up to starting
+2021-02-23T01:49:08.648379+00:00 heroku[router]: at=info method=GET path="/style.css" host=calm-escarpment-60393.herokuapp.com request_id=292625eb-2963-426c-bb27-a25d8b598d7f fwd="73.193.5.29" dyno=web.1 connect=0ms service=9ms status=304 bytes=208 protocol=https
+2021-02-23T01:49:08.819144+00:00 heroku[router]: at=info method=GET path="/results.js" host=calm-escarpment-60393.herokuapp.com request_id=42dca4c6-dadd-4fd9-a83d-52885c3702ef fwd="73.193.5.29" dyno=web.1 connect=0ms service=4ms status=304 bytes=208 protocol=https
+2021-02-23T01:49:09.556039+00:00 heroku[web.1]: Stopping all processes with SIGTERM
+2021-02-23T01:49:09.704883+00:00 app[web.1]: 2021-02-23 01:49:09.704  INFO 4 --- [extShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-02-23T01:49:09.782868+00:00 heroku[web.1]: Process exited with status 143
+2021-02-23T01:49:12.829110+00:00 heroku[web.1]: Starting process with command `java -Dserver.port=51682 $JAVA_OPTS -jar target/my-demo-0.0.1-SNAPSHOT.jar`
+2021-02-23T01:49:16.016116+00:00 app[web.1]: Create a Procfile to customize the command used to run this process: https://devcenter.heroku.com/articles/procfile
+2021-02-23T01:49:16.087580+00:00 app[web.1]: Setting JAVA_TOOL_OPTIONS defaults based on dyno size. Custom settings will override them.
+2021-02-23T01:49:16.096957+00:00 app[web.1]: Picked up JAVA_TOOL_OPTIONS: -Xmx300m -Xss512k -XX:CICompilerCount=2 -Dfile.encoding=UTF-8
+2021-02-23T01:49:22.571308+00:00 app[web.1]: 
+2021-02-23T01:49:22.571356+00:00 app[web.1]: .   ____          _            __ _ _
+2021-02-23T01:49:22.571430+00:00 app[web.1]: /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+2021-02-23T01:49:22.571529+00:00 app[web.1]: ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+2021-02-23T01:49:22.571622+00:00 app[web.1]: \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+2021-02-23T01:49:22.571711+00:00 app[web.1]: '  |____| .__|_| |_|_| |_\__, | / / / /
+2021-02-23T01:49:22.571848+00:00 app[web.1]: =========|_|==============|___/=/_/_/_/
+2021-02-23T01:49:22.579638+00:00 app[web.1]: :: Spring Boot ::        (v2.3.4.RELEASE)
+2021-02-23T01:49:22.579704+00:00 app[web.1]: 
+2021-02-23T01:49:23.531840+00:00 app[web.1]: 2021-02-23 01:49:23.518  INFO 4 --- [           main] com.seabass.doxing.DoxingApplication     : Starting DoxingApplication v0.0.1-SNAPSHOT on 2806d5de-b93f-41d3-9df2-fba18b1715cc with PID 4 (/app/target/my-demo-0.0.1-SNAPSHOT.jar started by u38017 in /app)
+2021-02-23T01:49:23.533887+00:00 app[web.1]: 2021-02-23 01:49:23.533  INFO 4 --- [           main] com.seabass.doxing.DoxingApplication     : No active profile set, falling back to default profiles: default
+2021-02-23T01:49:31.467520+00:00 app[web.1]: 2021-02-23 01:49:31.467  INFO 4 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 51682 (http)
+2021-02-23T01:49:31.626746+00:00 app[web.1]: 2021-02-23 01:49:31.626  INFO 4 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-02-23T01:49:31.632155+00:00 app[web.1]: 2021-02-23 01:49:31.631  INFO 4 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.38]
+2021-02-23T01:49:32.131246+00:00 app[web.1]: 2021-02-23 01:49:32.130  INFO 4 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-02-23T01:49:32.131611+00:00 app[web.1]: 2021-02-23 01:49:32.131  INFO 4 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 7926 ms
+2021-02-23T01:49:32.564821+00:00 app[web.1]: PG_PASSWORD is asdfasdfasdf1!
+2021-02-23T01:49:33.255190+00:00 app[web.1]: org.postgresql.util.PSQLException: The server does not support SSL.
+2021-02-23T01:49:33.255505+00:00 app[web.1]: at org.postgresql.core.v3.ConnectionFactoryImpl.enableSSL(ConnectionFactoryImpl.java:524)
+2021-02-23T01:49:33.255600+00:00 app[web.1]: at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:149)
+2021-02-23T01:49:33.255666+00:00 app[web.1]: at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:213)
+2021-02-23T01:49:33.255740+00:00 app[web.1]: at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:51)
+2021-02-23T01:49:33.255811+00:00 app[web.1]: at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:225)
+2021-02-23T01:49:33.255874+00:00 app[web.1]: at org.postgresql.Driver.makeConnection(Driver.java:465)
+2021-02-23T01:49:33.255946+00:00 app[web.1]: at org.postgresql.Driver.connect(Driver.java:264)
+2021-02-23T01:49:33.256030+00:00 app[web.1]: at java.sql.DriverManager.getConnection(DriverManager.java:664)
+2021-02-23T01:49:33.256107+00:00 app[web.1]: at java.sql.DriverManager.getConnection(DriverManager.java:247)
+2021-02-23T01:49:33.256184+00:00 app[web.1]: at com.seabass.doxing.Database.initializeConnection(Database.java:17)
+2021-02-23T01:49:33.262582+00:00 app[web.1]: at com.seabass.doxing.Endpoints.<init>(Endpoints.java:18)
+2021-02-23T01:49:33.262700+00:00 app[web.1]: at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+2021-02-23T01:49:33.262824+00:00 app[web.1]: at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+2021-02-23T01:49:33.262924+00:00 app[web.1]: at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+2021-02-23T01:49:33.263014+00:00 app[web.1]: at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+2021-02-23T01:49:33.263107+00:00 app[web.1]: at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:204)
+2021-02-23T01:49:33.263203+00:00 app[web.1]: at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:87)
+2021-02-23T01:49:33.263304+00:00 app[web.1]: at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1310)
+2021-02-23T01:49:33.263423+00:00 app[web.1]: at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1213)
+2021-02-23T01:49:33.263531+00:00 app[web.1]: at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:556)
+2021-02-23T01:49:33.263627+00:00 app[web.1]: at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:516)
+2021-02-23T01:49:33.263730+00:00 app[web.1]: at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:324)
+2021-02-23T01:49:33.263827+00:00 app[web.1]: at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+2021-02-23T01:49:33.263930+00:00 app[web.1]: at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
+2021-02-23T01:49:33.264023+00:00 app[web.1]: at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+2021-02-23T01:49:33.264120+00:00 app[web.1]: at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:897)
+2021-02-23T01:49:33.264223+00:00 app[web.1]: at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:879)
+2021-02-23T01:49:33.264335+00:00 app[web.1]: at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:551)
+2021-02-23T01:49:33.265154+00:00 app[web.1]: at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143)
+2021-02-23T01:49:33.265256+00:00 app[web.1]: at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:758)
+2021-02-23T01:49:33.268823+00:00 app[web.1]: at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:750)
+2021-02-23T01:49:33.268929+00:00 app[web.1]: at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+2021-02-23T01:49:33.269027+00:00 app[web.1]: at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
+2021-02-23T01:49:33.269124+00:00 app[web.1]: at org.springframework.boot.SpringApplication.run(SpringApplication.java:1237)
+2021-02-23T01:49:33.269215+00:00 app[web.1]: at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226)
+2021-02-23T01:49:33.275976+00:00 app[web.1]: at com.seabass.doxing.DoxingApplication.main(DoxingApplication.java:9)
+2021-02-23T01:49:33.276069+00:00 app[web.1]: at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+2021-02-23T01:49:33.277519+00:00 app[web.1]: at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+2021-02-23T01:49:33.277617+00:00 app[web.1]: at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+2021-02-23T01:49:33.278090+00:00 app[web.1]: at java.lang.reflect.Method.invoke(Method.java:498)
+2021-02-23T01:49:33.278227+00:00 app[web.1]: at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:49)
+2021-02-23T01:49:33.278318+00:00 app[web.1]: at org.springframework.boot.loader.Launcher.launch(Launcher.java:107)
+2021-02-23T01:49:33.278405+00:00 app[web.1]: at org.springframework.boot.loader.Launcher.launch(Launcher.java:58)
+2021-02-23T01:49:33.278496+00:00 app[web.1]: at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:88)
+2021-02-23T01:49:33.278956+00:00 app[web.1]: org.postgresql.util.PSQLException: The server does not support SSL.
+2021-02-23T01:49:33.279073+00:00 app[web.1]: FAILED TO CONNECT TO POSTGRES DATABASE
+2021-02-23T01:49:35.131183+00:00 app[web.1]: 2021-02-23 01:49:35.130  INFO 4 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-02-23T01:49:35.441410+00:00 app[web.1]: 2021-02-23 01:49:35.441  INFO 4 --- [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2021-02-23T01:49:35.831245+00:00 heroku[web.1]: State changed from starting to up
+2021-02-23T01:49:36.040384+00:00 app[web.1]: 2021-02-23 01:49:36.040  INFO 4 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 51682 (http) with context path ''
+2021-02-23T01:49:36.088609+00:00 app[web.1]: 2021-02-23 01:49:36.088  INFO 4 --- [           main] com.seabass.doxing.DoxingApplication     : Started DoxingApplication in 16.376 seconds (JVM running for 19.991)
