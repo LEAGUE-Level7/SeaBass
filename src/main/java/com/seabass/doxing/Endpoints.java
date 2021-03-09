@@ -20,10 +20,12 @@ public class Endpoints {
 
 	@PostMapping("/getScore")
 	Threat myMethod(@RequestBody String body) throws IOException, URISyntaxException {
-		System.out.println("post request: " + body);
 		JSONObject jsonobj = new JSONObject(body);
 		String username = jsonobj.getString("username");
-
+		if(username.indexOf("@")>-1){
+			username=username.substring(username.indexOf("@")+1);
+			System.out.println(username);
+		}
 		boolean checked = jsonobj.getBoolean("collectdata");
 		int threatLevel = 0;
 		double worldAverage = 0;
